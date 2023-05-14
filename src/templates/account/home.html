@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% include 'components/searchbar.html' %}
+
+<div class="text-center mt-6 mb-20">
+  <h1 class="text-5xl font-semibold text-white font-['Poppins']">Latest Topics</h1>
+</div>
+
+<div class="flex justify-evenly">
+  {% for card in 'x'|rjust:'3' %}
+  {% include 'components/info-card.html' %}
+  {% endfor %}
+</div>
+
+{% endblock %}
