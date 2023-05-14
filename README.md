@@ -1,0 +1,5 @@
+![Screenshot from 2023-05-14 17-52-56](https://github.com/chavdar94/WebFinalProject/assets/106109451/4a664240-1b28-41a8-871a-33a2883a4276)
+![Screenshot from 2023-05-14 17-53-09](https://github.com/chavdar94/WebFinalProject/assets/106109451/b25d328a-ad30-4207-9888-bda5e66f7e34)
+![Screenshot from 2023-05-14 17-53-19](https://github.com/chavdar94/WebFinalProject/assets/106109451/a7d6ff98-aa36-40a6-b823-cb12d0783d95)
+![Screenshot from 2023-05-14 17-53-26](https://github.com/chavdar94/WebFinalProject/assets/106109451/074952b1-ce5e-4376-b24f-ff757b4a800f)
+![Screenshot from 2023-05-14 17-53-39](https://github.com/chavdar94/WebFinalProject/assets/106109451/812e3fde-d910-4906-8d60-8a35641c5a2b)
