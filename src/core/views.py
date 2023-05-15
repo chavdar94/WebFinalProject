@@ -77,7 +77,6 @@ class ProfileView(views.View):
 
         try:
             profile = UserProfile.objects.filter(user_id=user.pk).get()
-
         except ObjectDoesNotExist:
             profile = UserProfile.objects.create(user=user)
 

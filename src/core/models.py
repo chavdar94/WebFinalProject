@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import models as auth_models, get_user_model
 from django.urls import reverse
 from django.utils import timezone
+from django.core import validators
 
 from .managers import AppUserManager
 
@@ -10,7 +11,10 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     email = models.EmailField(
         unique=True,
         null=False,
-        blank=False
+        blank=False,
+        validators=[
+            validators.EmailValidator('Email is not valid.'),
+        ]
     )
 
     is_staff = models.BooleanField(
@@ -75,6 +79,8 @@ class UserProfile(models.Model):
         null=True,
         blank=True,
     )
+
+    objects = models.Manager()
 
     @property
     def get_full_name(self):

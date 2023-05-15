@@ -1,0 +1,7 @@
+.card-text {
+  text-shadow:
+    1px  1px 1px #bcc2bf,
+    1px -1px 1px #bcc2bf,
+    -1px  1px 1px #bcc2bf,
+    -1px -1px 1px #bcc2bf;
+}
