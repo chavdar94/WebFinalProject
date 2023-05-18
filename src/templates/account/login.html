@@ -7,15 +7,16 @@
 <section>
     <div class="flex flex-col items-center justify-center pr-96 py-8 mx-auto my-24 lg:py-0">
 
-        <div class="w-full rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 backdrop-blur-md">
+        <div class="w-full rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 backdrop-blur-xl">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 class="text-2xl font-bold leading-tight tracking-tight text-gray-900">
+                <h1 class="text-2xl font-bold leading-tight tracking-tight text-slate-300">
                     Sign in to your account
                 </h1>
                 <form class="space-y-4" action="{% url 'sign-in' %}" method="post">
                     {% for field in form %}
                     <div>
-                        <label for="" class="block mb-2 text-lg font-semibold text-gray-900">{{ field.label }}</label>
+                        <label for="id_{{field.name|lower}}"
+                            class="block mb-2 text-lg font-semibold text-slate-300">{{ field.label }}</label>
                         {{ field }}
                     </div>
                     {% endfor %}
@@ -26,14 +27,14 @@
                                     class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800">
                             </div>
                             <div class="ml-3 text-sm">
-                                <label for="remember" class="text-gray-500 text-md">Remember me</label>
+                                <label for="remember" class="text-slate-500 text-md">Remember me</label>
                             </div>
                         </div>
                         <a href="#" class="text-md font-medium text-primary-600 hover:underline">Forgot
                             password?</a>
                     </div>
                     <button type="submit"
-                        class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center">
+                        class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">
                         Sign in
                     </button>
 
