@@ -16,7 +16,6 @@ UserModel = get_user_model()
 class HomePage(views.ListView):
     template_name = 'account/home.html'
     model = UserModel
-    paginate_by = 3
 
 
 class SignUp(SuccessMessageMixin, auth_mixins.UserPassesTestMixin, views.CreateView):
