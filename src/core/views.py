@@ -1,6 +1,6 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import get_object_or_404, render, redirect
+from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins, get_user_model, authenticate, login
 from django.contrib.auth import views as auth_views
@@ -28,7 +28,7 @@ class SignUp(SuccessMessageMixin, auth_mixins.UserPassesTestMixin, views.CreateV
         return not self.request.user.is_authenticated
 
     def handle_no_permission(self):
-        return redirect('index')
+        return redirect('home')
 
     def form_valid(self, form):
         valid = super(SignUp, self).form_valid(form)
@@ -80,7 +80,8 @@ class ProfileView(views.View):
             profile = UserProfile.objects.create(user=user)
 
         context = {
-            'profile': profile
+            'profile': profile,
+            'user': user,
         }
 
         return render(request, self.template_name, context)
@@ -111,6 +112,20 @@ class ProfileEditView(auth_mixins.LoginRequiredMixin, views.View):
         return render(request, 'profile/profile-edit.html', context)
 
 
-class PasswordChangeView(auth_views.PasswordChangeView):
+class PasswordChangeView(auth_mixins.LoginRequiredMixin, auth_views.PasswordChangeView):
     form_class = PasswordChangeForm
-    success_url = reverse_lazy('profile-page')
+    template_name = 'profile/password-reset.html'
+
+    def get_success_url(self) -> str:
+        user_pk = self.kwargs['pk']
+        return reverse_lazy('profile-page', kwargs={'pk': user_pk})
+
+    def get_object(self):
+        id_ = self.kwargs['pk']
+        return get_object_or_404(UserModel, id_)
+
+
+class ProfileDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+    model = UserModel
+    success_url = reverse_lazy('home')
+    template_name = 'profile/delete-profile.html'
