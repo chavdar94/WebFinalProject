@@ -1,0 +1,25 @@
+.card-text {
+  text-shadow:
+    1px  1px 1px #bcc2bf,
+    1px -1px 1px #bcc2bf,
+    -1px  1px 1px #bcc2bf,
+    -1px -1px 1px #bcc2bf;
+}
+
+.delete-box {
+  top: 160px;
+  text-align: center;
+  height: 200px;
+}
+
+.delete-box > form > h1 {
+  margin-bottom: 24px;
+}
+
+.del-btn {
+  background: rgb(224 36 36);
+}
+
+.del-btn:hover {
+  background: rgb(200 30 30);
+}

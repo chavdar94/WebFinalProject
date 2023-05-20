@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth import models as auth_models, get_user_model
-from django.urls import reverse
 from django.utils import timezone
 from django.core import validators
 

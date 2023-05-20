@@ -148,9 +148,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'core.AppUser'
 
 LOGIN_URL = reverse_lazy('sign-in')
-LOGIN_REDIRECT_URL = reverse_lazy('index')
+LOGIN_REDIRECT_URL = reverse_lazy('home')
 
-LOGOUT_REDIRECT_URL = reverse_lazy('index')
+LOGOUT_REDIRECT_URL = reverse_lazy('home')
 
 # Social logins
 AUTHENTICATION_BACKENDS = [
