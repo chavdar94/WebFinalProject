@@ -129,3 +129,4 @@ class ProfileDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = UserModel
     success_url = reverse_lazy('home')
     template_name = 'profile/delete-profile.html'
+
