@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-ttumb*w@zu%cch=u2)lc9&n#bp)(@^p+*z_q*iohz#r!fbsw9)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
+    'apps.core',
+    'apps.forum',
 
     'django.contrib.sites',
     'allauth',

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for post in object_list %}
+        <div>
+            <h2 class="text-4xl text-white">{{ post }}</h2>
+        </div>
+        {% empty %}
+        <h1 class="text-4xl text-white">No topics for {{ topic }}</h1>
+    {% endfor %}
+
+{% endblock %}

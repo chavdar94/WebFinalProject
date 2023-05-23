@@ -9,7 +9,7 @@
 </div>
 
 <div class="flex justify-evenly">
-  {% for card in 'x'|rjust:'3' %}
+  {% for post in object_list %}
   {% include 'components/info-card.html' %}
   {% endfor %}
 </div>

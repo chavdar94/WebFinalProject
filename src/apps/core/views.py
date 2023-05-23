@@ -9,13 +9,17 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import ProfileUpdateForm, RegisterForm, SignInForm, PasswordChangeForm
 from .models import UserProfile
+from ..forum import models as forum_models
 
 UserModel = get_user_model()
 
 
 class HomePage(views.ListView):
     template_name = 'account/home.html'
-    model = UserModel
+    model = forum_models.Post
+
+    def get_queryset(self):
+        return forum_models.Post.published.all()[:3]
 
 
 class SignUp(SuccessMessageMixin, auth_mixins.UserPassesTestMixin, views.CreateView):
@@ -129,4 +133,3 @@ class ProfileDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = UserModel
     success_url = reverse_lazy('home')
     template_name = 'profile/delete-profile.html'
-

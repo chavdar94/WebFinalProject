@@ -1,27 +1,29 @@
 {% extends 'profile/profile-base.html' %}
 
 {% block content %}
-<div class="w-full h-full flex justify-center items-center">
-  <div class="w-1/3 flex items-center justify-center rounded-xl mt-6 absolute delete-box backdrop-blur-md">
-    <form action="{% url 'delete-account' pk=object.pk %}" method="post">
+    <div class="w-full h-full flex justify-center items-center">
+        <div class="w-1/3 flex items-center justify-center rounded-xl mt-6 absolute delete-box backdrop-blur-md">
+            <form action="{% url 'delete-account' pk=object.pk %}" method="post">
 
-      <h1 class="text-4xl text-slate-200 font-bold mb-5">Are you sure you want to delete your profile?</h1>
-      <button type="button"
-        class="del-btn text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center mr-2">
-        <i class=" fa-solid fa-trash fa-lg mr-2"></i>
-        Delete account
-      </button>
+                <h1 class="text-4xl text-slate-200 font-bold mb-5">Are you sure you want to delete your profile?</h1>
+                <button type="button"
+                        class="del-btn text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center mr-2">
+                    <i class=" fa-solid fa-trash fa-lg mr-2"></i>
+                    Delete account
+                </button>
 
-      <a href="{% url 'profile-page' pk=user.pk %}"><button type="button" <button type="button"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center mr-2">
-          Cancel
-        </button>
-      </a>
+                <a href="{% url 'profile-page' pk=user.pk %}">
+                    <button type="button"
+                    <button type="button"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center mr-2">
+                        Cancel
+                    </button>
+                </a>
 
-      {% csrf_token %}
-    </form>
-  </div>
-</div>
+                {% csrf_token %}
+            </form>
+        </div>
+    </div>
 {% endblock %}
 
 {% block scripts %}
