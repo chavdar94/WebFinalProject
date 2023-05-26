@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
+
 
 from django.views import generic as views
 from .models import Post, Topic, Comment
@@ -8,6 +10,26 @@ class ForumPage(views.ListView):
     model = Post
     template_name = 'forum/forum.html'
     paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['pattern'] = self.request.GET.get('pattern', None)
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        pattern = self.__get_pattern()
+
+        if pattern:
+            vector = SearchVector('title', 'body', 'topic__name')
+            query = SearchQuery(pattern)
+            queryset = queryset.annotate(search=vector).filter(search=query)
+            # queryset = queryset.annotate(rank=SearchRank(vector, query)).filter(rank__gte=0.001).order_by('-rank')
+        return queryset
+
+    def __get_pattern(self):
+        pattern = self.request.GET.get('pattern', None)
+        return pattern.lower() if pattern else None
 
 
 class AllTopicsView(views.ListView):

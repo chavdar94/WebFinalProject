@@ -1984,16 +1984,17 @@ input:checked + .toggle-bg{
   color: rgb(133 77 14 / var(--tw-text-opacity));
 }
 
+.text-blue-200{
+  --tw-text-opacity: 1;
+  color: rgb(191 219 254 / var(--tw-text-opacity));
+}
+
 .underline{
   text-decoration-line: underline;
 }
 
 .underline-offset-4{
   text-underline-offset: 4px;
-}
-
-.underline-offset-8{
-  text-underline-offset: 8px;
 }
 
 .opacity-0{

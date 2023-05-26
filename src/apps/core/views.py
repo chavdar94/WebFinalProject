@@ -15,7 +15,7 @@ UserModel = get_user_model()
 
 
 class HomePage(views.ListView):
-    template_name = 'account/home.html'
+    template_name = 'base/home.html'
     model = forum_models.Post
 
     def get_queryset(self):

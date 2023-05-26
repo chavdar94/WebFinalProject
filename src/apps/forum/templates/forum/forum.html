@@ -1,7 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'base/base.html' %}
 
 {% block content %}
 
+    {% if pattern %}
+        <div>
+            <h2 class="text-center text-4xl text-white mt-2">Search results for
+                <strong>{{ pattern }}</strong>: {{ object_list.count }}</h2>
+        </div>
+    {% endif %}
 
     <div class="relative overflow-hidden shadow-md rounded-lg mx-6 my-5 backdrop-blur-xl">
         <table class="w-full text-sm text-center text-gray-500 border-spacing-1">
