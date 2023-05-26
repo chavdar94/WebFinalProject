@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="min-h-max min-w-max bg-blue-200 my-6 mx-6">
+        <div class="mx-6 py-4 flex justify-between items-center">
+            <div class="flex gap-2 items-center">
+                <p>Author:
+                <h2 class="text-xl font-semibold">{{ post.author }}</h2></p>
+            </div>
+            <p>Created on: {{ post.created|date:'d M, Y' }}</p>
+
+        </div>
+        <hr>
+        <h1 class="text-6xl text-white mb-12">{{ post.title }}</h1>
+        <p class="text-xl text-white mb-12">{{ post.body }}</p>
+
+        <ul>
+            {% for comment in comments %}
+                <li class="text-lg text-white">
+                    <p>{{ comment }}</p>
+                    <p>{{ comment.author }}</p>
+                </li>
+                {% empty %}
+                <h1 class="text-6xl text-white">No comments for {{ post }}</h1>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

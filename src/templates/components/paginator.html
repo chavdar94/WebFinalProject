@@ -1,0 +1,69 @@
+<nav aria-label="Page navigation example" class="text-center mr-6">
+    {% if page_obj.has_other_pages %}
+        <ul class="inline-flex -space-x-px">
+            <li>
+                <a href="?page=1"
+                   class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 ">First</a>
+            </li>
+
+            {% if page_obj.has_previous %}
+                <li>
+                    <a href="?page={{ page_obj.previous_page_number }}"
+                       class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
+                        <i class="fa-solid fa-angle-left fa-lg"></i>
+                    </a>
+                </li>
+            {% endif %}
+
+
+            {% if page_obj.number|add:'-2' > 1 %}
+                <li>
+                    <a class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                       href="?page={{ page_obj.number|add:'-2' }}">&hellip;</a>
+                </li>
+            {% endif %}
+
+            {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <li>
+                        <a href="?page={{ i }}" aria-current="page"
+                           class="px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700">{{ i }}</a>
+                    </li>
+                {% elif i > page_obj.number|add:'-2' and i < page_obj.number|add:'2' %}
+                    <li>
+                        <a href="?page={{ i }}"
+                           class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ">{{ i }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.paginator.num_pages > page_obj.number|add:'2' %}
+                <li>
+                    <a class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                       href="?page={{ page_obj.number|add:'-2' }}">&hellip;</a>
+                </li>
+
+
+                <li>
+                    <a class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                       href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+                </li>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+                <li>
+                    <a href="?page={{ page_obj.next_page_number }}"
+                       class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
+                        <i class="fa-solid fa-angle-right fa-lg"></i>
+                    </a>
+                </li>
+            {% endif %}
+
+            <li>
+                <a href="?page={{ page_obj.paginator.num_pages }}"
+                   class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 ">Last</a>
+            </li>
+
+        </ul>
+    {% endif %}
+</nav>

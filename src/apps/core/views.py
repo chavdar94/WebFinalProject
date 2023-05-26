@@ -19,7 +19,7 @@ class HomePage(views.ListView):
     model = forum_models.Post
 
     def get_queryset(self):
-        return forum_models.Post.published.all()[:3]
+        return forum_models.Post.objects.all()[:3]
 
 
 class SignUp(SuccessMessageMixin, auth_mixins.UserPassesTestMixin, views.CreateView):

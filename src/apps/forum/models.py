@@ -19,18 +19,8 @@ class Topic(models.Model):
         return self.name
 
 
-class PublishedManager(models.Manager):
-    def get_queryset(self):
-        return super().get_queryset().filter(status=Post.Status.PUBLISHED)
-
-
 class Post(models.Model):
     objects = models.Manager()
-    published = PublishedManager()
-
-    class Status(models.TextChoices):
-        DRAFT = 'DF', 'Draft'
-        PUBLISHED = 'PB', 'Published'
 
     title = models.CharField(
         max_length=50,
@@ -73,17 +63,8 @@ class Post(models.Model):
         auto_now=True,
     )
 
-    status = models.CharField(
-        max_length=2,
-        choices=Status.choices,
-        default=Status.DRAFT,
-    )
-
     class Meta:
         ordering = ['-publish']
-        indexes = [
-            models.Index(fields=['-publish'])
-        ]
 
     def __str__(self):
         return self.title
@@ -96,6 +77,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    objects = models.Manager()
     body = models.TextField(
         null=False,
         blank=False,
