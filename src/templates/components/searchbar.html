@@ -1,4 +1,4 @@
-<form class="w-1/3 mx-auto my-16" action="{% url 'forum_page' %}" method="get">
+<form class="w-1/3 mx-auto my-16" action="{% url 'forum_page' %}">
     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
     <div class="relative">
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none pr-5">
@@ -15,6 +15,5 @@
                 class="text-black absolute right-2.5 bottom-2.5 bg-slate-400 hover:bg-slate-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 ">
             Search
         </button>
-        {% csrf_token %}
     </div>
 </form>

@@ -1,7 +1,7 @@
 <div class="max-w-md p-6 opacity-1 border rounded-xl shadow bg-transparent border-gray-700 backdrop-blur-xl">
     <h5 class="mb-2 text-3xl font-bold tracking-tight text-gray-950">{{ post.title }}</h5>
   <p class="card-text mb-3 text-lg font-semibold text-gray-950 tracking-wide">{{ post.body|truncatewords:20 }}</p>
-  <a href="#"
+  <a href="{% url 'post_details' slug=post.slug %}"
     class="inline-flex items-center px-3 py-2 text-sm font-semibold text-center text-black  rounded-lg focus:ring-4 focus:outline-none bg-slate-300 hover:bg-slate-400">
     Read more
     <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"

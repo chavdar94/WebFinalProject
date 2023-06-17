@@ -12,9 +12,6 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         unique=True,
         null=False,
         blank=False,
-        validators=[
-            validators.EmailValidator('Email is not valid.'),
-        ]
     )
 
     is_staff = models.BooleanField(

@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins, get_user_model, authenticate, login
-from django.contrib.auth import views as auth_views
+from django.contrib.auth import views as auth_views, logout
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -27,6 +27,12 @@ class SignUp(SuccessMessageMixin, auth_mixins.UserPassesTestMixin, views.CreateV
     success_url = reverse_lazy('sign-in')
     template_name = 'account/sign-up.html'
     success_message = f'Account successfully created. You are now logged in.'
+
+    # SignIn when user creates profile
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        login(self.request, self.object)
+        return result
 
     def test_func(self):
         return not self.request.user.is_authenticated
@@ -61,8 +67,15 @@ class SignIn(SuccessMessageMixin, auth_views.LoginView):
         return redirect('sign-in')
 
 
-class SignOut(SuccessMessageMixin, auth_views.LogoutView):
-    pass
+# class SignOut(SuccessMessageMixin, auth_views.LogoutView):
+#     pass
+
+
+class SignOut(auth_mixins.LoginRequiredMixin, views.View):
+    def get(self, request):
+        logout(request)
+        messages.success(request, 'You logged out successfully')
+        return redirect('home')
 
 
 def signup_redirect(request):

@@ -23,8 +23,8 @@ class ForumPage(views.ListView):
         if pattern:
             vector = SearchVector('title', 'body', 'topic__name')
             query = SearchQuery(pattern)
-            queryset = queryset.annotate(search=vector).filter(search=query)
-            # queryset = queryset.annotate(rank=SearchRank(vector, query)).filter(rank__gte=0.001).order_by('-rank')
+            queryset = queryset.annotate(rank=SearchRank(vector, query)).filter(rank__gte=0.001).order_by('-rank')
+
         return queryset
 
     def __get_pattern(self):
