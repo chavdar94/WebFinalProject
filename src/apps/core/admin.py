@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.contrib.auth import admin as auth_admin, get_user_model
 from .forms import RegisterForm
 from .models import UserProfile
+from ..forum.models import Like
 
 UserModel = get_user_model()
 
@@ -49,4 +50,9 @@ class AppUserAdmin(auth_admin.UserAdmin):
 
 @admin.register(UserProfile)
 class ProfileAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Like)
+class LikeAdmin(admin.ModelAdmin):
     pass

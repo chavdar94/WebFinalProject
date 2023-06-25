@@ -133,7 +133,7 @@ class PasswordChangeView(auth_mixins.LoginRequiredMixin, auth_views.PasswordChan
     form_class = PasswordChangeForm
     template_name = 'profile/password-reset.html'
 
-    def get_success_url(self) -> str:
+    def get_success_url(self):
         user_pk = self.kwargs['pk']
         return reverse_lazy('profile-page', kwargs={'pk': user_pk})
 

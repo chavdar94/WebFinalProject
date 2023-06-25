@@ -7,7 +7,7 @@ urlpatterns = [
     path('sign-up/', views.SignUp.as_view(), name='sign-up'),
     path('sign-in/', views.SignIn.as_view(), name='sign-in'),
     path('sign-out/', views.SignOut.as_view(), name='sign-out'),
-    path('accounts/social/signup/', views.signup_redirect, name='signup_redirect'),
+    path('accounts/google/login/', views.signup_redirect, name='signup_redirect'),
     path('profile/', include([
         path('<int:pk>/', views.ProfileView.as_view(), name='profile-page'),
         path('<int:pk>/edit-profile',
