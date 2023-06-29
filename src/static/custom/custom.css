@@ -1,25 +1,40 @@
-.card-text {
-  text-shadow:
-    1px  1px 1px #bcc2bf,
-    1px -1px 1px #bcc2bf,
-    -1px  1px 1px #bcc2bf,
-    -1px -1px 1px #bcc2bf;
+.topic-text,
+.card-text,
+.forum-table tr th,
+.forum-table tr td {
+    text-shadow: 2px 2px 2px #000000,
+    1px -1px 1px #000000,
+    -1px 1px 1px #000000,
+    -1px -1px 1px #000000;
+}
+
+header {
+    border-bottom: 1px solid gray;
+}
+
+footer {
+    border-top: 1px solid gray;
 }
 
 .delete-box {
-  top: 160px;
-  text-align: center;
-  height: 200px;
+    top: 160px;
+    text-align: center;
+    height: 200px;
 }
 
 .delete-box > form > h1 {
-  margin-bottom: 24px;
+    margin-bottom: 24px;
 }
 
 .del-btn {
-  background: rgb(224 36 36);
+    background: rgb(224 36 36);
 }
 
 .del-btn:hover {
-  background: rgb(200 30 30);
+    background: rgb(200 30 30);
+}
+
+.topic-card,
+.card-item{
+    box-shadow: 1px 1px 10px 5px #44474d;
 }

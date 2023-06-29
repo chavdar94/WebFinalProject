@@ -1,0 +1,112 @@
+/* home-page */
+@media only screen and (max-width: 640px), (max-width: 768px), (max-width: 1024px) {
+    .card-container {
+        width: 80%; /* Set the desired fixed width for the cards */
+    }
+
+    .parent-card {
+        flex-wrap: wrap;
+    }
+
+    .justify-center {
+        justify-content: center;
+    }
+
+    .logo {
+        font-size: 28px;
+    }
+}
+
+@media only screen and (max-width: 768px), (max-width: 1024px) {
+    .card-container {
+        width: 80%;
+    }
+
+    .parent-card {
+        align-items: center;
+    }
+}
+
+
+@media only screen and (max-width: 600px), (max-width: 768px) {
+    .topic-bt-txt {
+        padding: 4px;
+        text-align: center;
+    }
+
+    .btn-txt {
+        padding: 0;
+    }
+
+    #default-search::placeholder {
+        color: transparent;
+    }
+}
+
+@media (max-width: 970px) {
+    #default-search::placeholder {
+        color: transparent;
+    }
+}
+
+/* Login page */
+
+@media (max-width: 600px), (max-width: 768px), (max-width: 1024px) {
+    .auth-card {
+        padding: 0;
+        margin-left: 36px;
+        margin-right: 36px
+    }
+}
+
+/* posts */
+
+@media (max-width: 600px) {
+    .all-posts {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .topic-card {
+        width: 100%;
+    }
+}
+
+/* forum table */
+
+@media (max-width: 600px), (max-width: 768px) {
+    th {
+        display: none;
+    }
+
+    td {
+        display: block;
+    }
+
+    td::before {
+        content: attr(data-cell) ": ";
+        font-weight: 700;
+        text-transform: capitalize;
+    }
+
+    .paginator {
+        margin-bottom: 18px;
+    }
+}
+
+/* profile */
+
+@media (max-width: 600px), (max-width: 768px) {
+    .profile-container {
+        width: 80%;
+        margin: 48px auto;
+    }
+}
+
+@media (max-width: 600px), (max-width: 768px) {
+    .reset-pwd-container {
+        padding: 0;
+        width: 90%;
+    }
+
+}

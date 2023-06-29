@@ -29,10 +29,10 @@ class SignUp(SuccessMessageMixin, auth_mixins.UserPassesTestMixin, views.CreateV
     success_message = f'Account successfully created. You are now logged in.'
 
     # SignIn when user creates profile
-    def form_valid(self, form):
-        result = super().form_valid(form)
-        login(self.request, self.object)
-        return result
+    # def form_valid(self, form):
+    #     result = super().form_valid(form)
+    #     login(self.request, self.object)
+    #     return result
 
     def test_func(self):
         return not self.request.user.is_authenticated

@@ -1,6 +1,6 @@
-<nav class="text-white flex justify-between px-5 w-full h-24 backdrop-blur-md">
+<nav class="text-white flex justify-between px-12 w-full h-24 backdrop-blur-md">
     <div class="flex justify-between items-center">
-    <span class="text-4xl font-['Poppins']">
+    <span class="logo text-4xl font-['Poppins']">
       <a href="{% url 'home' %}">Dev Forum</a>
     </span>
     </div>
@@ -16,9 +16,8 @@
                 class="font-['Poppins'] text-xl hover:bg-slate-300 hover:text-black hover:rounded-2xl hover:px-4 hover:py-1.5 hover:backdrop-blur-md"
                 href="{% url 'forum_topics' %}">Topics</a></li>
         {% if request.user.is_authenticated %}
-            <li
-                    class="text-black text-xl ml-10 py-1.5  rounded-2xl bg-orange-400 shadow-2xl font-bold font-['Poppins'] inline-block hover:bg-orange-600">
-                <a class="px-8 py-1.5 relative" href="">NEW TOPIC</a></li>
+            <li class="topic-bt-txt text-black text-xl ml-10 py-1.5 rounded-2xl bg-orange-400 shadow-2xl font-bold font-['Poppins'] inline-block hover:bg-orange-600 ">
+                <a class="btn-txt px-8 py-1.5 relative" href="">NEW TOPIC</a></li>
 
             {% comment %}
                 <li class='text-black text-xl mx-2 py-1.5  rounded-full bg-slate-300 shadow-2xl hover:bg-slate-400'><a

@@ -11,12 +11,15 @@
 </head>
 
 <body>
-<div class="hero flex flex-col min-h-screen" style="background: url('{% static 'images/bg-darken.jpg' %}');">
+<div class="hero flex flex-col min-h-screen w-full"
+     style="background: url({{ background }});
+             background-repeat: no-repeat;
+             background-size: cover ">
     <header>
         {% include 'components/navbar.html' %}
     </header>
 
-    <main class="grow">
+    <main class="grow w-full">
         {% for message in messages %}
             {% if message.tags == 'error' %}
                 <div id="alert-2"
@@ -84,8 +87,8 @@
 <script>
 	setTimeout(function () {
 		{#$('.msg').fadeOut('fast');#}
-        let message = document.querySelector('.msg')
-        message.style.display = 'none'
+		let message = document.querySelector('.msg')
+		message.style.display = 'none'
 	}, 3000); // <-- time in milliseconds
 </script>
 

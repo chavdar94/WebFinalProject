@@ -2,16 +2,18 @@
 
 
 {% block content %}
-{% include 'components/searchbar.html' %}
+    {% include 'components/searchbar.html' %}
 
-<div class="text-center mt-6 mb-20">
-  <h1 class="text-5xl font-semibold text-white font-['Poppins']">Latest Topics</h1>
-</div>
+    <div class="text-center mt-6 mb-20">
+        <h1 class="text-5xl font-semibold text-white font-['Poppins']">Latest Topics</h1>
+    </div>
 
-<div class="flex justify-evenly">
-  {% for post in object_list %}
-    {% include 'components/info-card.html' %}
-  {% endfor %}
-</div>
+    <div class="parent-card flex justify-center xl:justify-evenly lg:flex-row lg:justify-around md:justify-center sm:flex-col sm:gap-2">
+        {% for post in object_list %}
+            <div class="card-container lg:flex lg:gap-8 md:justify-center">
+                {% include 'components/info-card.html' %}
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

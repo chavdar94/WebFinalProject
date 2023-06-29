@@ -1,18 +1,18 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-    <div class="w-full h-full flex flex-wrap gap-8 justify-center my-12 px-28">
+    <div class="all-posts w-full h-full flex flex-wrap gap-8 justify-center my-12 px-28">
         {% for topic in object_list %}
 
             <div class="topic-card w-1/6 h-56 flex flex-col justify-center items-center gap-2 border-2 rounded-2xl backdrop-blur-xl">
                 <div class="border-b-2">
                     <a href="{% url 'topic_page' name=topic %}" class=""><h2
-                            class="text-slate-300 text-5xl mb-3 text-center font-bold italic hover:scale-110">{{ topic }}</h2>
+                            class="topic-text text-slate-300 text-5xl mb-3 text-center font-bold italic hover:scale-110">{{ topic }}</h2>
                     </a>
                 </div>
                 <div class="mt-2">
-                    {% for post in topic.post_set.all|slice:'3' %}
-                        <a href=""><p class="text-slate-300 text-2xl mb-1 hover:scale-110">{{ post }}</p></a>
+                    {% for post in topic.post_set.all|slice:3 %}
+                        <a href=""><p class="topic-text text-slate-300 text-2xl font-semibold mb-1 hover:scale-110">{{ post }}</p></a>
                     {% endfor %}
                 </div>
             </div>

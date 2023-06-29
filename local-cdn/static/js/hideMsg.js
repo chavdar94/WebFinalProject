@@ -1,3 +1,3 @@
 setTimeout(function() {
     $('.msg').fadeOut('fast');
-}, 3000); // <-- time in milliseconds
+}, 2000); // <-- time in milliseconds

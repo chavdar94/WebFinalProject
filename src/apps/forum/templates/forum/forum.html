@@ -9,8 +9,8 @@
         </div>
     {% endif %}
 
-    <div class="relative overflow-hidden shadow-md rounded-lg mx-6 my-5 backdrop-blur-xl">
-        <table class="w-full text-sm text-center text-gray-500 border-spacing-1">
+    <div class="relative overflow-hidden shadow-md rounded-lg mx-auto my-5 backdrop-blur-xl w-[calc(100%-2rem)]">
+        <table class="forum-table w-full text-sm text-center text-gray-500 border-spacing-1">
             <thead class="text-3xl text-white uppercase backdrop-blur-xl">
             <tr class="border-2">
                 <th scope="col" class="px-6 py-3 underline underline-offset-4">
@@ -30,16 +30,16 @@
             <tbody>
             {% for post in object_list %}
                 <tr class="border-2 backdrop-blur-xl">
-                    <th scope="row" class="px-6 py-4 font-bold text-white text-xl whitespace-nowrap hover:scale-125">
+                    <td data-cell="post" class="px-6 py-4 font-bold text-white text-xl whitespace-nowrap hover:scale-125">
                         <a href="{% url 'post_details' slug=post.slug %}">{{ post }}</a>
-                    </th>
-                    <td class="px-6 py-4 font-semibold text-lg text-white">
+                    </td>
+                    <td data-cell="category" class="px-6 py-4 font-semibold text-lg text-white">
                         {{ post.topic }}
                     </td>
-                    <td class="px-6 py-4 font-semibold text-lg text-white">
+                    <td data-cell="author" class="px-6 py-4 font-semibold text-lg text-white">
                         {{ post.author }}
                     </td>
-                    <td class="px-6 py-4 font-semibold text-lg text-white">
+                    <td data-cell="created" class="px-6 py-4 font-semibold text-lg text-white">
                         {{ post.created|date:'d M, Y' }}
                     </td>
                 </tr>

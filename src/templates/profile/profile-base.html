@@ -3,30 +3,39 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'custom/custom.css' %}">
-  <title>Profile</title>
-  {% include 'head/css.html' %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'custom/custom.css' %}">
+    <title>Profile</title>
+    {% include 'head/css.html' %}
 </head>
 
 <body>
-  <div class="flex flex-col min-h-screen bg-no-repeat object-scale-down"
-    style="background: url('{% static 'images/profile-bg.jpg' %}')">
+<div class="flex flex-col min-h-screen bg-no-repeat object-scale-down"
+     style="background: url('{% static 'images/profile-bg.jpg' %}')">
     <header>
-      {% include 'components/navbar.html' %}
+        {% include 'components/navbar.html' %}
     </header>
 
     <main class="grow relative">
-      {% block content %}
-      {% endblock %}
+        {% block content %}
+        {% endblock %}
     </main>
-    <footer class="w-full h-20 backdrop-blur-xl flex justify-around items-center">
-      {% include 'components/footer.html' %}
-    </footer>
+</div>
+<footer class="w-full h-20 backdrop-blur-xl flex justify-around items-center">
+    {% include 'components/footer.html' %}
+</footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+<script>
+	setTimeout(function () {
+		{#$('.msg').fadeOut('fast');#}
+		let message = document.querySelector('.msg')
+		message.style.display = 'none'
+	}, 3000); // <-- time in milliseconds
+</script>
+
 </body>
 
 </html>
