@@ -35,6 +35,8 @@ footer {
 }
 
 .topic-card,
-.card-item{
+.card-item,
+.shadow-box,
+.forum-table{
     box-shadow: 1px 1px 10px 5px #44474d;
 }

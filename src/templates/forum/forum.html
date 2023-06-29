@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
+    {% include 'components/searchbar.html' %}
 
     {% if pattern %}
         <div>
@@ -9,7 +10,7 @@
         </div>
     {% endif %}
 
-    <div class="relative overflow-hidden shadow-md rounded-lg mx-auto my-5 backdrop-blur-xl w-[calc(100%-2rem)]">
+    <div class="relative overflow-hidden shadow-md rounded-lg mx-auto backdrop-blur-xl w-[calc(100%-2rem)]">
         <table class="forum-table w-full text-sm text-center text-gray-500 border-spacing-1">
             <thead class="text-3xl text-white uppercase backdrop-blur-xl">
             <tr class="border-2">

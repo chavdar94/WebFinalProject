@@ -2,39 +2,42 @@
 
 {% block content %}
 
-<section>
-  <div class="reset-pwd-container flex flex-col items-start justify-center pl-12 py-8 mx-auto my-24 lg:py-0">
+    <section>
+        <div class="reset-pwd-container flex flex-col items-start justify-center pl-12 py-8 mx-auto mt-12 lg:py-0">
 
-    <div class="w-full rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 backdrop-blur-md">
-      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-        <h1 class="text-2xl font-bold leading-tight tracking-tight text-white">
-          Edit your account for <strong class="italic">{{ user.user_name }}</strong>
-        </h1>
-        <form class="space-y-4" action="{% url 'profile-edit' pk=request.user.pk %}" method="post"
-          enctype='multipart/form-data'>
-          {% for field in form %}
-          <div>
-            <label for="{{ field.name|lower }}"
-              class="block mb-2 text-lg font-semibold text-white">{{ field.label }}</label>
-            {{ field }}
-          </div>
-          {% endfor %}
+            <div class="shadow-box w-2/4 rounded-lg shadow backdrop-blur-md">
+                <div class="flex flex-wrap p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 class="text-2xl font-bold leading-tight tracking-tight text-white">
+                        Edit your account for <strong class="italic">{{ user.user_name }}</strong>
+                    </h1>
+                    <form class="flex flex-row flex-wrap gap-4 justify-start items-center"
+                          action="{% url 'profile-edit' pk=request.user.pk %}" method="post"
+                          enctype='multipart/form-data'>
+                        {% for field in form %}
+                            <div>
+                                <label for="{{ field.name|lower }}"
+                                       class="block mb-2 text-lg font-semibold text-white">{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
 
-          <button type="submit" style="margin-top: 32px;"
-            class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-sm px-5 py-3 text-center">
-            Edit
-          </button>
+                        <div class="w-full flex gap-4 justify-start">
+                            <button type="submit" style="margin-top: 32px;"
+                                    class="w-[calc(29%)] text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-sm px-5 py-3 text-center">
+                                Edit
+                            </button>
 
-          <a href="{% url 'profile-page' pk=user.pk %}">
-            <button type="button" style="margin-top: 12px;"
-              class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-3 text-center">
-              Go back
-            </button>
-          </a>
-          {% csrf_token %}
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+                            <a class="w-[calc(29%)] " href="{% url 'profile-page' pk=user.pk %}">
+                                <button type="button" style="margin-top: 32px;"
+                                        class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-3 text-center">
+                                    Go back
+                                </button>
+                            </a>
+                        </div>
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

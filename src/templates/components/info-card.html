@@ -1,4 +1,4 @@
-<div class="card-item xl:max-w-md flex flex-col items-start justify-evenly  p-6 opacity-1 border rounded-xl shadow bg-transparent border-gray-700 backdrop-blur-xl mx-auto mb-4 {% if forloop.last %} 'mb-0'{% endif %} }}">
+<div class="card-item w-[400px] h-[250px] flex flex-col items-start justify-evenly  p-6 opacity-1 border rounded-xl shadow bg-transparent border-gray-700 backdrop-blur-xl mx-auto mb-4 {% if forloop.last %} 'mb-0'{% endif %} }}">
     <h5 class="card-text mb-2 text-3xl font-bold tracking-tight text-slate-300">{{ post.title }}</h5>
     <p class="card-text mb-3 text-lg font-semibold text-slate-300 tracking-wide">{{ post.body|truncatewords:20 }}</p>
     <a href="{% url 'post_details' slug=post.slug %}"

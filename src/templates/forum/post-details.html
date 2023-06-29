@@ -1,9 +1,17 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block content %}
     <div class="max-h-min min-w-min bg-blue-200 my-6 mx-6">
         <div class="mx-6 py-4 flex justify-between items-center">
             <div class="flex gap-2 items-center">
+                <div class="mr-2">
+                    {% if post.author.userprofile.profile_picture %}
+                        <img src="{{ post.author.userprofile.profile_picture.url }}" alt="">
+                    {% else %}
+                        <i class="fa-solid fa-user"></i>
+                    {% endif %}
+                </div>
                 <p>Author:
                 <h2 class="text-xl font-semibold">{{ post.author }}</h2></p>
             </div>
@@ -15,11 +23,12 @@
             <h1 class="text-6xl text-white mb-12 underline">{{ post.title }}</h1>
             <p class="text-xl text-white mb-12">{{ post.body }}</p>
 
+            <h3 class="border-b-2 border-black text-3xl pb-2">Comments:</h3>
             <ul>
                 {% for comment in comments %}
-                    <li class="text-lg text-white">
-                        <p>{{ comment }}</p>
-                        <p>{{ comment.author }}</p>
+                    <li class="text-lg text-white mt-4 border-b-2 border-black">
+                        <p>Comment: {{ comment }}</p>
+                        <p class="mb-2">Author: {{ comment.author }}</p>
                     </li>
                     {% empty %}
                     <h1 class="text-6xl text-white pb-12">No comments for {{ post }}</h1>

@@ -41,6 +41,10 @@
     #default-search::placeholder {
         color: transparent;
     }
+
+    .navbar {
+        height: 80px;
+    }
 }
 
 @media (max-width: 970px) {
