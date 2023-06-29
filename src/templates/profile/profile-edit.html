@@ -5,8 +5,8 @@
     <section>
         <div class="reset-pwd-container flex flex-col items-start justify-center pl-12 py-8 mx-auto mt-12 lg:py-0">
 
-            <div class="shadow-box w-2/4 rounded-lg shadow backdrop-blur-md">
-                <div class="flex flex-wrap p-6 space-y-4 md:space-y-6 sm:p-8">
+            <div class="inner-box shadow-box w-2/4 rounded-lg shadow backdrop-blur-md">
+                <div class="flex flex-wrap p-6 space-y-4 md:space-y-6">
                     <h1 class="text-2xl font-bold leading-tight tracking-tight text-white">
                         Edit your account for <strong class="italic">{{ user.user_name }}</strong>
                     </h1>
@@ -14,7 +14,7 @@
                           action="{% url 'profile-edit' pk=request.user.pk %}" method="post"
                           enctype='multipart/form-data'>
                         {% for field in form %}
-                            <div>
+                            <div class="input-div">
                                 <label for="{{ field.name|lower }}"
                                        class="block mb-2 text-lg font-semibold text-white">{{ field.label }}</label>
                                 {{ field }}

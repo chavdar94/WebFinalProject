@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth import forms as auth_forms, get_user_model
+from django.contrib.auth import forms as auth_forms, get_user_model, login, authenticate
+from django.core.exceptions import ValidationError
 
 from .models import UserProfile
 
@@ -10,6 +11,9 @@ class RegisterForm(auth_forms.UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.__clear_fields_helper_text()
+
+        for field_name in ['email', 'password1', 'password2']:
+            self.fields[field_name].help_text = None
 
     class Meta:
         model = UserModel
@@ -26,6 +30,12 @@ class RegisterForm(auth_forms.UserCreationForm):
         if commit:
             profile.save()
         return user
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email and get_user_model().objects.filter(email=email).exists():
+            raise ValidationError('This email is already taken.')
+        return email
 
     def __clear_fields_helper_text(self):
         for field in self.fields.values():
@@ -77,7 +87,7 @@ class ProfileUpdateForm(forms.ModelForm):
         self.fields['profile_picture'].widget.attrs.update(
             {
                 'class': 'block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
-                }
+            }
         )
 
     def __set_field_classes(self):

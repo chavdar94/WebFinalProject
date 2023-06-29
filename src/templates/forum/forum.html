@@ -18,7 +18,7 @@
                     Post name
                 </th>
                 <th scope="col" class="px-6 py-3 underline underline-offset-4">
-                    Category
+                    Topic
                 </th>
                 <th scope="col" class="px-6 py-3 underline underline-offset-4">
                     Author
@@ -34,7 +34,7 @@
                     <td data-cell="post" class="px-6 py-4 font-bold text-white text-xl whitespace-nowrap hover:scale-125">
                         <a href="{% url 'post_details' slug=post.slug %}">{{ post }}</a>
                     </td>
-                    <td data-cell="category" class="px-6 py-4 font-semibold text-lg text-white">
+                    <td data-cell="topic" class="px-6 py-4 font-semibold text-lg text-white">
                         {{ post.topic }}
                     </td>
                     <td data-cell="author" class="px-6 py-4 font-semibold text-lg text-white">

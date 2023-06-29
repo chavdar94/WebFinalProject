@@ -20,7 +20,15 @@
                             <div>
                                 <label for="id_{{ field.name|lower }}"
                                        class="block mb-2 text-lg font-semibold text-slate-300">{{ field.label }}</label>
+                                {% if field.errors %}
+                                    <ul class="errorlist mb-2">
+                                        {% for error in field.errors %}
+                                            <li><span class="error-text text-red-400">{{ error }}</span></li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                                 {{ field }}
+
                             </div>
                         {% endfor %}
 

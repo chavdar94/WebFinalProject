@@ -1,8 +1,13 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
-
-
 from django.views import generic as views
+from django.contrib.auth import mixins as auth_mixins
+from django.http import Http404
+
+from .forms import TopicCreateForm
+from .mixins.moderator_group_mixin import GroupRequiredMixin
+
 from .models import Post, Topic, Comment
 
 
@@ -43,13 +48,25 @@ class TopicPage(views.ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        return qs.filter(topic_id__name=self.kwargs['name'])
+        return qs.filter(topic_id__slug=self.kwargs['slug'])
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        topic_name = Topic.objects.filter(name=self.kwargs['name']).get()
+        topic_name = Topic.objects.filter(slug=self.kwargs['slug']).get()
         context['topic'] = topic_name
         return context
+
+
+class TopicCreate(auth_mixins.LoginRequiredMixin, GroupRequiredMixin, views.CreateView):
+    group_required = 'moderators'
+    form_class = TopicCreateForm
+    template_name = 'forum/topic-create.html'
+    success_url = reverse_lazy('forum_topics')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_superuser and not request.user.groups.filter(name='moderators').exists():
+            raise Http404("Page not found")
+        return super().dispatch(request, *args, **kwargs)
 
 
 class PostDetailsPage(views.View):

@@ -28,12 +28,6 @@ class SignUp(SuccessMessageMixin, auth_mixins.UserPassesTestMixin, views.CreateV
     template_name = 'account/sign-up.html'
     success_message = f'Account successfully created. You are now logged in.'
 
-    # SignIn when user creates profile
-    # def form_valid(self, form):
-    #     result = super().form_valid(form)
-    #     login(self.request, self.object)
-    #     return result
-
     def test_func(self):
         return not self.request.user.is_authenticated
 
@@ -49,26 +43,21 @@ class SignUp(SuccessMessageMixin, auth_mixins.UserPassesTestMixin, views.CreateV
 
         return valid
 
-    def form_invalid(self, form):
-        messages.add_message(self.request, messages.ERROR,
-                             'Invalid form, please enter valid email and password.')
-        return redirect('sign-up')
 
-
-class SignIn(SuccessMessageMixin, auth_views.LoginView):
+class SignIn(auth_views.LoginView):
     form_class = SignInForm
     template_name = 'account/login.html'
     redirect_authenticated_user = True
-    success_message = 'You logged in successfully.'
 
+    # success_message = 'You logged in successfully.'
+    #
     def form_invalid(self, form):
-        messages.add_message(self.request, messages.ERROR,
-                             'Invalid email or password, please enter valid email and password.')
-        return redirect('sign-in')
-
-
-# class SignOut(SuccessMessageMixin, auth_views.LogoutView):
-#     pass
+        # messages.add_message(self.request, messages.ERROR,
+        #                      'Invalid email or password, please enter valid email and password.')
+        # return redirect('sign-in')
+        form.errors.clear()
+        form.add_error(None, 'Invalid email or password')
+        return super().form_invalid(form)
 
 
 class SignOut(auth_mixins.LoginRequiredMixin, views.View):
@@ -89,7 +78,6 @@ class ProfileView(views.View):
 
     def get(self, request, pk):
         user = UserModel.objects.filter(pk=pk).get()
-        # profile = UserProfile.objects.filter(user_id=user.pk).get()
 
         try:
             profile = UserProfile.objects.filter(user_id=user.pk).get()
