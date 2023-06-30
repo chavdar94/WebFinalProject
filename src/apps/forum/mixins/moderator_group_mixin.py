@@ -1,11 +1,11 @@
-from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, AccessMixin
+from django.http import Http404
 
 
-class GroupRequiredMixin(UserPassesTestMixin):
-    group_required = None
-
-    def test_func(self):
-        if self.request.user.is_superuser:
-            return True
-        user_groups = self.request.user.groups.values_list('name', flat=True)
-        return self.group_required in user_groups
+class GroupRequiredMixin(AccessMixin):
+    allowed_groups = []
+    def dispatch(self, request, *args, **kwargs):
+        user_groups = request.user.groups.values_list('name', flat=True)
+        if not set(self.allowed_groups) and not set(user_groups):
+            raise Http404()
+        return super().dispatch(request, *args, **kwargs)

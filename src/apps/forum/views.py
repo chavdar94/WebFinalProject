@@ -58,15 +58,10 @@ class TopicPage(views.ListView):
 
 
 class TopicCreate(auth_mixins.LoginRequiredMixin, GroupRequiredMixin, views.CreateView):
-    group_required = 'moderators'
+    group_required = ['moderators', 'admins']
     form_class = TopicCreateForm
     template_name = 'forum/topic-create.html'
     success_url = reverse_lazy('forum_topics')
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_superuser and not request.user.groups.filter(name='moderators').exists():
-            raise Http404("Page not found")
-        return super().dispatch(request, *args, **kwargs)
 
 
 class PostDetailsPage(views.View):
