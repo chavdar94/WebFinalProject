@@ -13,7 +13,9 @@
                     {% endif %}
                 </div>
                 <p>Author:
-                <h2 class="text-xl font-semibold">{{ post.author }}</h2></p>
+                    <a href="{% url 'profile-page' pk=post.author_id %}"><h2
+                            class="text-xl font-semibold">{{ post.author }}</h2></p>
+                </a>
             </div>
             <p>Created on: {{ post.created|date:'d M, Y' }}</p>
 
@@ -36,5 +38,25 @@
             </ul>
         </div>
     </div>
+
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <div>
+                <button>Submit</button>
+            </div>
+        </form>
+    </div>
+    {% if request.user.pk == post.author.pk or request.user.is_superuser or is_admin or is_moderator %}
+        <div class="flex gap-6">
+            <div>
+                <a href="{% url 'post_edit' slug=post.slug %}">Edit post</a>
+            </div>
+            <div>
+                <a href="{% url 'post_delete' slug=post.slug %}">Delete post</a>
+            </div>
+        </div>
+    {% endif %}
 
 {% endblock %}

@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
@@ -6,6 +8,7 @@ from django.contrib.auth import mixins as auth_mixins, get_user_model, authentic
 from django.contrib.auth import views as auth_views, logout
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 
 from .forms import ProfileUpdateForm, RegisterForm, SignInForm, PasswordChangeForm
 from .models import UserProfile
@@ -49,12 +52,14 @@ class SignIn(auth_views.LoginView):
     template_name = 'account/login.html'
     redirect_authenticated_user = True
 
-    # success_message = 'You logged in successfully.'
-    #
+    def form_valid(self, form):
+        remember_me = form.cleaned_data['remember_me']
+        if remember_me:
+            expiry_duration = timedelta(days=31)
+            self.request.session.set_expiry(expiry_duration.total_seconds())
+        return super().form_valid(form)
+
     def form_invalid(self, form):
-        # messages.add_message(self.request, messages.ERROR,
-        #                      'Invalid email or password, please enter valid email and password.')
-        # return redirect('sign-in')
         form.errors.clear()
         form.add_error(None, 'Invalid email or password')
         return super().form_invalid(form)
@@ -77,7 +82,7 @@ class ProfileView(views.View):
     template_name = 'profile/profile.html'
 
     def get(self, request, pk):
-        user = UserModel.objects.filter(pk=pk).get()
+        user = get_object_or_404(UserModel, pk=pk)
 
         try:
             profile = UserProfile.objects.filter(user_id=user.pk).get()
@@ -92,32 +97,46 @@ class ProfileView(views.View):
         return render(request, self.template_name, context)
 
 
-class ProfileEditView(auth_mixins.LoginRequiredMixin, views.View):
+class ProfileEditView(auth_mixins.UserPassesTestMixin, auth_mixins.LoginRequiredMixin, views.View):
 
-    def post(self, request, pk):
-        user = UserModel.objects.filter(pk=pk).get()
+    def post(self, request, *args, **kwargs):
+        user = UserModel.objects.filter(pk=self.kwargs['pk']).get()
         profile = UserProfile.objects.filter(user_id=user.pk).get()
 
         form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
 
-            return redirect('profile-page', pk=pk)
+            return redirect('profile-page', pk=self.kwargs['pk'])
 
-    def get(self, request, pk):
-        user = UserModel.objects.filter(pk=pk).get()
+    def get(self, request, *args, **kwargs):
+        user = UserModel.objects.filter(pk=self.kwargs['pk']).get()
         profile = UserProfile.objects.filter(user_id=user.pk).get()
 
         form = ProfileUpdateForm(instance=profile)
 
         context = {
-            'form': form
+            'form': form,
+            'user': user,
         }
 
         return render(request, 'profile/profile-edit.html', context)
 
+    def test_func(self):
+        return self.get_object().pk == self.request.user.pk or self.request.user.is_superuser \
+            or self.request.user.is_staff
 
-class PasswordChangeView(auth_mixins.LoginRequiredMixin, auth_views.PasswordChangeView):
+    def handle_no_permission(self):
+        raise Http404()
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        obj = get_object_or_404(UserModel, pk=pk)
+        return obj
+
+
+class PasswordChangeView(auth_mixins.UserPassesTestMixin, auth_mixins.LoginRequiredMixin,
+                         auth_views.PasswordChangeView):
     form_class = PasswordChangeForm
     template_name = 'profile/password-reset.html'
 
@@ -125,12 +144,30 @@ class PasswordChangeView(auth_mixins.LoginRequiredMixin, auth_views.PasswordChan
         user_pk = self.kwargs['pk']
         return reverse_lazy('profile-page', kwargs={'pk': user_pk})
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.get_object()
+        return context
+
     def get_object(self):
-        id_ = self.kwargs['pk']
-        return get_object_or_404(UserModel, id_)
+        pk = self.kwargs.get('pk')
+        obj = get_object_or_404(UserModel, pk=pk)
+        return obj
+
+    def test_func(self):
+        return self.get_object().pk == self.request.user.pk or self.request.user.is_superuser
+
+    def handle_no_permission(self):
+        raise Http404()
 
 
-class ProfileDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+class ProfileDeleteView(auth_mixins.UserPassesTestMixin, auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = UserModel
     success_url = reverse_lazy('home')
     template_name = 'profile/delete-profile.html'
+
+    def test_func(self):
+        return self.get_object().pk == self.request.user.pk or self.request.user.is_superuser
+
+    def handle_no_permission(self):
+        raise Http404()

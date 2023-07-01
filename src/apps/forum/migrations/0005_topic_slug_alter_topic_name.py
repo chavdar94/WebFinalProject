@@ -11,13 +11,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='topic',
+            model_name='topics',
             name='slug',
             field=models.SlugField(default='asd'),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='topic',
+            model_name='topics',
             name='name',
             field=models.CharField(max_length=50),
         ),

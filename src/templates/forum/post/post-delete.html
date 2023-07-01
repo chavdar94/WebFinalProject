@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="card-item lg:w-3/4 sm:w-3/4 md:w-3/4 xl:w-2/4 max-h-full mx-auto my-12 opacity-1 border rounded-xl shadow bg-transparent border-gray-700 backdrop-blur-xl flex flex-col justify-center items-center">
+        <h1 class="break-words w-3/4 text-center text-slate-300 text-4xl font-bold mt-8 mx-4 font-['Poppins']">Are you sure you want to delete ` {{ post }} ` post?</h1>
+        <form action="{% url 'post_delete' slug=post.slug %}" method="post" class="flex flex-col w-2/4 my-auto mt-8">
+            {% for field in form %}
+                <div class="mb-6 flex flex-col">
+                    <label for="id_{{ field.name }}" class="text-slate-300 text-4xl font-semibold mb-2 font-['Poppins']">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            {% csrf_token %}
+            <div class="mx-auto mb-5 w-1/2 flex gap-6">
+                <button class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">Delete</button>
+                <a href="{% url 'post_details' slug=post.slug %}" class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

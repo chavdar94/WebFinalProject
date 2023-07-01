@@ -45,6 +45,10 @@ class RegisterForm(auth_forms.UserCreationForm):
 
 
 class SignInForm(auth_forms.AuthenticationForm):
+    remember_me = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
+        'class': 'w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300'
+    }))
+
     class Meta:
         model = UserModel
         fields = ('email', 'password')
@@ -54,9 +58,10 @@ class SignInForm(auth_forms.AuthenticationForm):
         self.__set_field_classes()
 
     def __set_field_classes(self):
-        for field in self.fields.values():
-            field.widget.attrs[
-                'class'] = 'bg-slate-200 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5'
+        for name, field in self.fields.items():
+            if name != 'remember_me':
+                field.widget.attrs[
+                    'class'] = 'bg-slate-200 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5'
 
 
 class PasswordChangeForm(auth_forms.PasswordChangeForm):

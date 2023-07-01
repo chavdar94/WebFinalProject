@@ -1,18 +1,16 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-    {% include 'components/searchbar.html' %}
-
-    {% if pattern %}
-        <div>
-            <h2 class="text-center text-4xl text-white mt-2">Search results for
-                <strong>{{ pattern }}</strong>: {{ object_list.count }}</h2>
-        </div>
-    {% else %}
-        <div>
-            <h2 class="text-center text-4xl text-white mb-4">Total posts: {{ total_posts }}</h2>
-        </div>
-    {% endif %}
+    <div>
+        <div class="text-center"><h1 class="text-7xl text-white font-bold mb-8 text-center mt-5 mr-36 inline-block pl-32">{{ topic }}</h1></div>
+        {% if request.user.is_authenticated %}
+            <div class="relative bottom-16 left-4/5">
+                <a href="{% url 'post_create' slug=topic.slug %}"
+                   class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center ml-44">Create
+                    new post</a>
+            </div>
+        {% endif %}
+    </div>
 
     <div class="relative overflow-hidden shadow-md rounded-lg mx-auto backdrop-blur-xl w-[calc(100%-2rem)]">
         <table class="forum-table w-full text-sm text-center text-gray-500 border-spacing-1">
@@ -22,13 +20,13 @@
                     Post name
                 </th>
                 <th scope="col" class="px-6 py-3 underline underline-offset-4">
-                    Topic
-                </th>
-                <th scope="col" class="px-6 py-3 underline underline-offset-4">
                     Author
                 </th>
                 <th scope="col" class="px-6 py-3 underline underline-offset-4">
                     Created on
+                </th>
+                <th scope="col" class="px-6 py-3 underline underline-offset-4">
+                    Last updated
                 </th>
             </tr>
             </thead>
@@ -40,13 +38,13 @@
                         <a href="{% url 'post_details' slug=post.slug %}">{{ post }}</a>
                     </td>
                     <td data-cell="topic" class="px-6 py-4 font-semibold text-lg text-white">
-                        <a href="{% url 'topic_page' slug=post.topic.slug %}">{{ post.topic }}</a>
-                    </td>
-                    <td data-cell="author" class="px-6 py-4 font-semibold text-lg text-white">
                         <a href="{% url 'profile-page' pk=post.author_id %}">{{ post.author }}</a>
                     </td>
+                    <td data-cell="author" class="px-6 py-4 font-semibold text-lg text-white">
+                        {{ post.created|date:'d M, y' }}
+                    </td>
                     <td data-cell="created" class="px-6 py-4 font-semibold text-lg text-white">
-                        {{ post.created|date:'d M, Y' }}
+                        {{ post.updated|date:'d M, Y' }}
                     </td>
                 </tr>
             {% endfor %}
@@ -55,4 +53,5 @@
     </div>
 
     {% include 'components/paginator.html' %}
+
 {% endblock %}

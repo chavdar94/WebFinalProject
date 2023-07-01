@@ -36,6 +36,7 @@ class Post(models.Model):
         max_length=50,
         null=False,
         blank=False,
+        unique=True,
     )
 
     body = models.TextField(
@@ -48,6 +49,7 @@ class Post(models.Model):
         null=False,
         blank=False,
         editable=False,
+        unique=True,
     )
 
     author = models.ForeignKey(

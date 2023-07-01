@@ -5,6 +5,7 @@
     <div class="profile-container w-1/3 ml-6 mt-6 p-6 border border-gray-200 rounded-lg shadow backdrop-blur-xl">
         <h1 class="mb-2 text-4xl font-bold tracking-tight text-white">{{ profile.user.user_name|capfirst }}'s
             Profile</h1>
+        <p class="mb-3 font-normal text-white text-2xl">Email: {{ user.email }}</p>
         {% if user.userprofile.first_name %}
             <p class="mb-3 font-normal text-white text-2xl">First name: {{ user.userprofile.first_name }}</p>
         {% else %}
@@ -77,7 +78,7 @@
             </div>
         {% endif %}
 
-        {% if request.user.user_name == profile.user.user_name %}
+        {% if request.user.user_name == profile.user.user_name or request.user.is_superuser or request.user.is_staff %}
             <a href="{% url 'password-change' pk=profile.user.pk %}"
                class="inline-flex items-center px-3 py-2 text-md font-semibold text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
                 Change password
@@ -87,11 +88,12 @@
                class="inline-flex items-center px-3 py-2 text-md font-semibold text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
                 Edit profile
             </a>
-
-            <a href="{% url 'delete-account' pk=profile.user.pk %}"
-               class="inline-flex items-center px-3 py-2 text-md font-semibold text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                Delete profile
-            </a>
+            {% if request.user.user_name == profile.user.user_name or request.user.is_superuser %}
+                <a href="{% url 'delete-account' pk=profile.user.pk %}"
+                   class="inline-flex items-center px-3 py-2 text-md font-semibold text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                    Delete profile
+                </a>
+            {% endif %}
         {% endif %}
     </div>
 
