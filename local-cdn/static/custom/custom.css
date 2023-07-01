@@ -1,7 +1,8 @@
 .topic-text,
 .card-text,
 .forum-table tr th,
-.forum-table tr td {
+.forum-table tr td,
+.error-text {
     text-shadow: 2px 2px 2px #000000,
     1px -1px 1px #000000,
     -1px 1px 1px #000000,
@@ -35,6 +36,8 @@ footer {
 }
 
 .topic-card,
-.card-item{
+.card-item,
+.shadow-box,
+.forum-table{
     box-shadow: 1px 1px 10px 5px #44474d;
 }

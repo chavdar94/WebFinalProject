@@ -1,5 +1,4 @@
-/* home-page */
-@media only screen and (max-width: 640px), (max-width: 768px), (max-width: 1024px) {
+@media only screen and (min-width: 600px) and  (max-width: 767px) {
     .card-container {
         width: 80%; /* Set the desired fixed width for the cards */
     }
@@ -14,6 +13,100 @@
 
     .logo {
         font-size: 28px;
+    }
+
+    .search-bar {
+        width: 67%;
+    }
+
+    #dropdownAvatar {
+        min-width: 80%;
+        height: 50px;
+    }
+
+    #dropdownAvatar > .px-4 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .divide-slate-500 > :not([hidden]) ~ :not([hidden]) {
+        border-top-width: 0;
+    }
+    .menu-inline,
+    .menu-inline > li {
+        display: inline-block;
+        padding-top: 4px;
+        padding-bottom: 0;
+    }
+
+    .email {
+        margin-left: 48px;
+    }
+
+    .inner {
+        padding-bottom: 4px;
+        /*margin-left: 35%;*/
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+        .card-container {
+        width: 80%; /* Set the desired fixed width for the cards */
+    }
+
+    .parent-card {
+        flex-wrap: wrap;
+    }
+
+    .justify-center {
+        justify-content: center;
+    }
+
+    .logo {
+        font-size: 28px;
+    }
+
+    .search-bar {
+        width: 67%;
+    }
+
+    #dropdownAvatar {
+        min-width: 60%;
+        height: 50px;
+    }
+
+    #dropdownAvatar > .px-4 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .divide-slate-500 > :not([hidden]) ~ :not([hidden]) {
+        border-top-width: 0;
+    }
+    .menu-inline,
+    .menu-inline > li {
+        display: inline-block;
+        padding-top: 4px;
+        padding-bottom: 0;
+    }
+
+    .email {
+       margin-left: 48px;
+    }
+
+    .inner {
+        padding-bottom: 4px;
+        /*margin-left: 35%;*/
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1300px) {
+    .parent-card {
+        flex-wrap: wrap;
+    }
+
+    .search-bar {
+        width: 50%;
     }
 }
 
@@ -41,6 +134,10 @@
     #default-search::placeholder {
         color: transparent;
     }
+
+    .navbar {
+        height: 80px;
+    }
 }
 
 @media (max-width: 970px) {
@@ -61,10 +158,32 @@
 
 /* posts */
 
-@media (max-width: 600px) {
+@media (max-width: 600px), (max-width: 768px) {
     .all-posts {
         display: flex;
         flex-direction: column;
+    }
+
+    .topic-card {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .all-posts {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .topic-card {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1350px) {
+    .all-posts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .topic-card {
@@ -96,17 +215,23 @@
 
 /* profile */
 
-@media (max-width: 600px), (max-width: 768px) {
+@media (max-width: 600px), (max-width: 768px), (max-width: 1400px) {
     .profile-container {
         width: 80%;
         margin: 48px auto;
     }
-}
-
-@media (max-width: 600px), (max-width: 768px) {
     .reset-pwd-container {
         padding: 0;
         width: 90%;
+        justify-content: space-between;
     }
+    .inner-box {
+        width: 100%;
+    }
+}
 
+@media (max-width: 768px){
+    .input-div {
+        width: 100%;
+    }
 }
