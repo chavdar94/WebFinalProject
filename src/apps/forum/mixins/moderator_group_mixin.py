@@ -1,7 +1,6 @@
 from django.contrib.auth.mixins import AccessMixin
 from django.http import Http404
 
-
 class GroupRequiredMixin(AccessMixin):
     allowed_groups = []
 

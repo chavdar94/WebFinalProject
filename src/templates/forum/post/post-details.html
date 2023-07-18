@@ -39,6 +39,7 @@
         </div>
     </div>
 
+    {% if request.user.is_authenticated %}
     <div>
         <form method="post">
             {% csrf_token %}
@@ -48,7 +49,8 @@
             </div>
         </form>
     </div>
-    {% if request.user.pk == post.author.pk or request.user.is_superuser or is_admin or is_moderator %}
+    {% endif %}
+    {% if request.user.pk == post.author.pk or request.user.is_superuser or request.user.is_staff %}
         <div class="flex gap-6">
             <div>
                 <a href="{% url 'post_edit' slug=post.slug %}">Edit post</a>

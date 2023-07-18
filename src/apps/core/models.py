@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth import models as auth_models, get_user_model
 from django.utils import timezone
-from django.core import validators
 from django.shortcuts import reverse
+from django.contrib.auth.models import Group
 
 from .managers import AppUserManager
 
