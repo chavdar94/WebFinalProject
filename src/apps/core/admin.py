@@ -15,7 +15,8 @@ class ProfileInline(admin.StackedInline):
 @admin.register(UserModel)
 class AppUserAdmin(auth_admin.UserAdmin):
     ordering = ('email',)
-    list_display = ('email', 'date_joined', 'last_login', 'is_superuser', 'is_staff')
+    list_display = ('email', 'date_joined', 'last_login',
+                    'is_superuser', 'is_staff')
     list_filter = ()
     add_form = RegisterForm
     inlines = auth_admin.UserAdmin = (ProfileInline,)

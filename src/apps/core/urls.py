@@ -17,6 +17,4 @@ urlpatterns = [
         path('<int:pk>/delete-account/',
              views.ProfileDeleteView.as_view(), name='delete-account'),
     ])),
-
-
 ]

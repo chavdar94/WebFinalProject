@@ -4,7 +4,7 @@ node_modules/
 venv/
 finalProject.code-workspace
 profile-picture/
-
+postgresql
 # Django #
 *.log
 *.pot

@@ -1,0 +1,237 @@
+@media only screen and (min-width: 600px) and  (max-width: 767px) {
+    .card-container {
+        width: 80%; /* Set the desired fixed width for the cards */
+    }
+
+    .parent-card {
+        flex-wrap: wrap;
+    }
+
+    .justify-center {
+        justify-content: center;
+    }
+
+    .logo {
+        font-size: 28px;
+    }
+
+    .search-bar {
+        width: 67%;
+    }
+
+    #dropdownAvatar {
+        min-width: 80%;
+        height: 50px;
+    }
+
+    #dropdownAvatar > .px-4 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .divide-slate-500 > :not([hidden]) ~ :not([hidden]) {
+        border-top-width: 0;
+    }
+    .menu-inline,
+    .menu-inline > li {
+        display: inline-block;
+        padding-top: 4px;
+        padding-bottom: 0;
+    }
+
+    .email {
+        margin-left: 48px;
+    }
+
+    .inner {
+        padding-bottom: 4px;
+        /*margin-left: 35%;*/
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+        .card-container {
+        width: 80%; /* Set the desired fixed width for the cards */
+    }
+
+    .parent-card {
+        flex-wrap: wrap;
+    }
+
+    .justify-center {
+        justify-content: center;
+    }
+
+    .logo {
+        font-size: 28px;
+    }
+
+    .search-bar {
+        width: 67%;
+    }
+
+    #dropdownAvatar {
+        min-width: 60%;
+        height: 50px;
+    }
+
+    #dropdownAvatar > .px-4 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .divide-slate-500 > :not([hidden]) ~ :not([hidden]) {
+        border-top-width: 0;
+    }
+    .menu-inline,
+    .menu-inline > li {
+        display: inline-block;
+        padding-top: 4px;
+        padding-bottom: 0;
+    }
+
+    .email {
+       margin-left: 48px;
+    }
+
+    .inner {
+        padding-bottom: 4px;
+        /*margin-left: 35%;*/
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1300px) {
+    .parent-card {
+        flex-wrap: wrap;
+    }
+
+    .search-bar {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 768px), (max-width: 1024px) {
+    .card-container {
+        width: 80%;
+    }
+
+    .parent-card {
+        align-items: center;
+    }
+}
+
+
+@media only screen and (max-width: 600px), (max-width: 768px) {
+    .topic-bt-txt {
+        padding: 4px;
+        text-align: center;
+    }
+
+    .btn-txt {
+        padding: 0;
+    }
+
+    #default-search::placeholder {
+        color: transparent;
+    }
+
+    .navbar {
+        height: 80px;
+    }
+}
+
+@media (max-width: 970px) {
+    #default-search::placeholder {
+        color: transparent;
+    }
+}
+
+/* Login page */
+
+@media (max-width: 600px), (max-width: 768px), (max-width: 1024px) {
+    .auth-card {
+        padding: 0;
+        margin-left: 36px;
+        margin-right: 36px
+    }
+}
+
+/* posts */
+
+@media (max-width: 600px), (max-width: 768px) {
+    .all-posts {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .topic-card {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .all-posts {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .topic-card {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1350px) {
+    .all-posts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .topic-card {
+        width: 100%;
+    }
+}
+
+/* forum table */
+
+@media (max-width: 600px), (max-width: 768px) {
+    th {
+        display: none;
+    }
+
+    td {
+        display: block;
+    }
+
+    td::before {
+        content: attr(data-cell) ": ";
+        font-weight: 700;
+        text-transform: capitalize;
+    }
+
+    .paginator {
+        margin-bottom: 18px;
+    }
+}
+
+/* profile */
+
+@media (max-width: 600px), (max-width: 768px), (max-width: 1400px) {
+    .profile-container {
+        width: 80%;
+        margin: 48px auto;
+    }
+    .reset-pwd-container {
+        padding: 0;
+        width: 90%;
+        justify-content: space-between;
+    }
+    .inner-box {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px){
+    .input-div {
+        width: 100%;
+    }
+}

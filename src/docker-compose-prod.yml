@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+  web:
+    image: dev_forum
+    build: .
+    command: gunicorn dev_forum.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - /tmp/dev_forum/static:/app/static
+    ports:
+      - "8000:8000"
+    env_file:
+      - forum.env
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: mypass
+      POSTGRES_USER: postgres
+      POSTGRES_DB: web_final
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - web
+    volumes:
+      - /tmp/dev_forum/static:/home/app/web/staticfiles
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+    links:
+      - web
