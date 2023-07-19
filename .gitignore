@@ -15,6 +15,10 @@ media
 static
 staticfiles
 
+*.pem
+*.env
+envs
+
 # Backup files #
 *.bak
 
