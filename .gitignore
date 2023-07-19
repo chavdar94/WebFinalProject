@@ -12,6 +12,12 @@ postgresql
 __pycache__
 db.sqlite3
 media
+static
+staticfiles
+
+*.pem
+*.env
+envs/
 
 forum.env
 # Backup files #
