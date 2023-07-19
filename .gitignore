@@ -17,7 +17,7 @@ staticfiles
 
 *.pem
 *.env
-envs
+envs/
 
 forum.env
 # Backup files #
