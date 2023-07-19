@@ -12,6 +12,8 @@ postgresql
 __pycache__
 db.sqlite3
 media
+static
+staticfiles
 
 # Backup files #
 *.bak

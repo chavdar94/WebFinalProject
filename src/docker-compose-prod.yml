@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   web:
-    image: dev_forum
+    image: choko2/dev_forum
     build: .
     command: gunicorn dev_forum.wsgi:application --bind 0.0.0.0:8000
     volumes:
@@ -10,7 +10,7 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - forum.env
+      - .envs/.env
     depends_on:
       - postgres
 
