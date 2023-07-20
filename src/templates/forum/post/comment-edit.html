@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="card-item w-3/4 max-h-full mx-auto my-12 opacity-1 border rounded-xl shadow bg-transparent border-gray-700 backdrop-blur-xl flex flex-col justify-center items-center">
+        <h1 class="break-words w-3/4 text-center text-slate-300 text-4xl font-bold mt-8 font-['Poppins']">Edit
+            your comment</h1>
+        <form action="{% url 'comment_edit' slug=object.post.slug pk=object.pk %}" method="post" class="flex flex-col w-3/4 m-auto mt-12">
+            {% for field in form %}
+                <div class="mb-6 flex flex-col">
+                    <label for="id_{{ field.name }}"
+                           class="text-slate-300 text-4xl font-semibold mb-2 font-['Poppins']">{{ field.label }}</label>
+                    {% if field.errors %}
+                        <ul class="errorlist mb-2">
+                            {% for error in field.errors %}
+                                <li><span class="error-text text-red-400 text-lg">{{ error }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {{ field }}
+                </div>
+            {% endfor %}
+            {% csrf_token %}
+            <div class="mx-auto mt-2 mb-8 w-1/2 flex gap-6">
+                <button class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">
+                    Edit
+                </button>
+                <a href="{% url 'post_details' slug=object.post.slug %}"
+                   class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

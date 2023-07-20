@@ -38,7 +38,7 @@ class PostDeleteForm(forms.ModelForm):
             field.required = False
 
 
-class CommentCreateForm(forms.ModelForm):
+class CommentBaseForm(forms.ModelForm):
     class Meta:
         fields = ('body',)
         model = Comment
@@ -53,3 +53,22 @@ class CommentCreateForm(forms.ModelForm):
     def __set_fields_classes(self):
         for field in self.fields.values():
             field.widget.attrs['class'] = 'rounded-xl bg-slate-300 text-lg font-["Poppins"]'
+
+
+class CommentCreateForm(CommentBaseForm):
+    pass
+
+
+class CommentEditForm(CommentBaseForm):
+    pass
+
+
+class CommentDeleteForm(CommentBaseForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__set_disabled_fields()
+
+    def __set_disabled_fields(self):
+        for field in self.fields.values():
+            field.widget.attrs['disabled'] = True
+            field.required = False

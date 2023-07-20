@@ -4,7 +4,7 @@ from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
 from django.http import Http404
 
-from .forms import PostCreateForm, CommentCreateForm, PostUpdateForm, PostDeleteForm
+from .forms import PostCreateForm, CommentCreateForm, PostUpdateForm, PostDeleteForm, CommentEditForm, CommentDeleteForm
 from ..models import Post, Topic, Comment
 
 
@@ -101,6 +101,40 @@ class PostDeleteView(auth_mixins.UserPassesTestMixin, auth_mixins.LoginRequiredM
         form = super().get_form_kwargs()
         form.update(instance=instance)
         return form
+
+    def test_func(self):
+        return self.get_object().author.pk == self.request.user.pk or self.request.user.is_superuser \
+            or self.request.user.is_staff
+
+    def handle_no_permission(self):
+        raise Http404()
+
+
+class CommentEditView(auth_mixins.UserPassesTestMixin, auth_mixins.LoginRequiredMixin, views.UpdateView):
+    form_class = CommentEditForm
+    template_name = 'forum/post/comment-edit.html'
+    model = Comment
+
+    def get_success_url(self):
+        return reverse_lazy('post_details', kwargs={'slug': self.kwargs['slug']})
+
+    def test_func(self):
+        return self.get_object().author.pk == self.request.user.pk or self.request.user.is_superuser \
+            or self.request.user.is_staff
+
+    def handle_no_permission(self):
+        raise Http404()
+
+
+class CommentDeleteView(auth_mixins.UserPassesTestMixin, auth_mixins.LoginRequiredMixin, views.DeleteView):
+    form_class = CommentDeleteForm
+    model = Comment
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy('post_details', kwargs={'slug': self.kwargs['slug']})
 
     def test_func(self):
         return self.get_object().author.pk == self.request.user.pk or self.request.user.is_superuser \

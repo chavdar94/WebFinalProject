@@ -31,10 +31,14 @@
             <div class="border-2 rounded-lg p-4 mb-4">
                 <h1 class="text-4xl text-white mb-12 border-b-2 pb-2">{{ post.title }}</h1>
                 <p class="text-xl text-white mb-12">{{ post.body }}</p>
-                <div class="mb-2 flex gap-4 justify-end">
-                    <a class="w-1/12  text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center" href="{% url 'post_edit' slug=post.slug %}">Edit post</a>
-                    <a class="w-1/12  text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center" href="{% url 'post_delete' slug=post.slug %}">Delete post</a>
-                </div>
+                {% if request.user.pk == comment.author.pk or request.user.is_staff or request.user.is_superuser %}
+                    <div class="mb-2 flex gap-4 justify-end">
+                        <a class="w-1/12  text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center"
+                           href="{% url 'post_edit' slug=post.slug %}">Edit post</a>
+                        <a class="w-1/12  text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center"
+                           href="{% url 'post_delete' slug=post.slug %}">Delete post</a>
+                    </div>
+                {% endif %}
             </div>
             <h3 class="border-white text-slate-300 text-3xl pb-2">Comments:</h3>
             <div>
@@ -60,7 +64,24 @@
                                             {% endif %}
                                         </div>
                                     </div>
-                                    <p class="break-all w-11/12">{{ comment.body }}</p>
+                                    <div class="w-full flex">
+                                        {% if request.user.pk == comment.author.pk or request.user.is_staff or request.user.is_superuser %}
+                                            <p class="break-all w-5/6">{{ comment.body }}</p>
+                                            <div class="w-1/6 mb-2 flex flex-col gap-4 justify-end items-end">
+                                                <a class="h-1/4 w-2/3 text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center"
+                                                   href="{% url 'comment_edit' slug=post.slug pk=comment.pk %}">Edit</a>
+                                                <form method="POST"
+                                                      action="{% url 'comment_delete' slug=post.slug pk=comment.pk %}">
+                                                    {% csrf_token %}
+                                                    <button class="text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-11 py-2.5 text-center">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        {% else %}
+                                            <p class="break-all w-full">{{ comment.body }}</p>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </li>
                         </div>
@@ -73,7 +94,7 @@
     </div>
 
     {% if request.user.is_authenticated %}
-        <div class="card-item shadow backdrop-blur-xl w-1/2 m-auto mb-6 flex justify-center items-center">
+        <div class="card-item shadow backdrop-blur-xl rounded-xl w-1/2 m-auto mb-6 flex justify-center items-center">
             <form method="post" class="w-full flex flex-col justify-center items-center">
                 {% csrf_token %}
                 {% for field in form %}
