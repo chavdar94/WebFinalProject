@@ -11,6 +11,9 @@ module.exports = {
       colors: {
         ...colors,
       },
+      width: {
+        '11/13': '88.666667%',
+      }
     },
   },
   plugins: [

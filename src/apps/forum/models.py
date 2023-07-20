@@ -84,7 +84,7 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.title, allow_unicode=True)
         return super().save(*args, **kwargs)
 
 
@@ -109,8 +109,8 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
     )
 
-    def __str__(self):
-        return self.body[:50]
+    # def __str__(self):
+    #     return self.body[:50]
 
 
 class Like(models.Model):

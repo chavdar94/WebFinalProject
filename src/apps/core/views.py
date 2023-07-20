@@ -1,5 +1,5 @@
 from datetime import timedelta
-
+from django.core.paginator import Paginator
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
@@ -13,6 +13,7 @@ from django.http import Http404
 from .forms import ProfileUpdateForm, RegisterForm, SignInForm, PasswordChangeForm
 from .models import UserProfile
 from ..forum import models as forum_models
+from ..forum.models import Comment, Post
 
 UserModel = get_user_model()
 
@@ -83,6 +84,12 @@ class ProfileView(views.View):
 
     def get(self, request, pk):
         user = get_object_or_404(UserModel, pk=pk)
+        user_comments = Comment.objects.select_related('author').filter(author=user)
+
+        paginator = Paginator(user_comments, 8)
+        page_number = request.GET.get('page') or 1
+        page_obj = paginator.get_page(page_number)
+        user_posts = Post.objects.select_related('author').filter(author=user)[:4]
 
         try:
             profile = UserProfile.objects.filter(user_id=user.pk).get()
@@ -92,6 +99,11 @@ class ProfileView(views.View):
         context = {
             'profile': profile,
             'user': user,
+            'user_comments': user_comments,
+            'user_posts': user_posts,
+            'paginator': paginator,
+            'page_number': page_number,
+            'page_obj': page_obj,
         }
 
         return render(request, self.template_name, context)

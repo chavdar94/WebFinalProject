@@ -12,7 +12,7 @@ urlpatterns = [
     path('create/topics/', topic_views.TopicCreate.as_view(), name='topic_create'),
 
     # posts
-    path('post/<slug:slug>/', include([
+    path('post/<str:slug>/', include([
         path('', post_views.PostDetailsPage.as_view(), name='post_details'),
         path('create/', post_views.PostCreateView.as_view(), name='post_create'),
         path('edit/', post_views.PostEditView.as_view(), name='post_edit'),

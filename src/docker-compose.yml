@@ -8,7 +8,7 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - ./envs/.env
+      - ./dev_forum/envs/.env
     depends_on:
       - postgres
   postgres:

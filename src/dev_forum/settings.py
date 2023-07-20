@@ -1,11 +1,7 @@
 from pathlib import Path
 import os
-from dotenv import load_dotenv
 
 from django.urls import reverse_lazy
-
-
-load_dotenv()
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,7 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', None)
 DEBUG = bool(int(os.getenv('DEBUG', 1)))
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(' ')
-
+print(os.getenv('SECRET_KEY'))
 
 INSTALLED_APPS = [
     'jet.dashboard',
