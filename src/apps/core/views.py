@@ -183,3 +183,20 @@ class ProfileDeleteView(auth_mixins.UserPassesTestMixin, auth_mixins.LoginRequir
 
     def handle_no_permission(self):
         raise Http404()
+
+
+# http error views
+
+def bad_request(request):
+    context = {}
+    return render(request, '404.html', context, status=400)
+
+
+def permission_denied(request):
+    context = {}
+    return render(request, '404.html', context, status=403)
+
+
+def server_error(request):
+    context = {}
+    return render(request, '404.html', context, status=500)
