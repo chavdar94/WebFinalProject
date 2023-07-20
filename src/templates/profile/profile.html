@@ -105,9 +105,9 @@
                 </div>
             </div>
             <div class="profile-container w-full h-1/2 ml-6 p-6 border border-gray-200 rounded-lg shadow backdrop-blur-xl flex flex-col justify-center items-start">
-                <h1 class="text-slate-300 text-2xl text-center font-bold mb-4">Latest posts from - {{ user.email }}</h1>
+                <h1 class="text-slate-300 text-xl text-center font-bold mb-4">Latest posts from - {{ user.email }}</h1>
                 {% for post in user_posts %}
-                    <span class="block w-full text-slate-300 text-2xl p-4 mb-4 border border-gray-200 rounded lg">
+                    <span class="block w-full text-slate-300 text-xl p-4 mb-4 border border-gray-200 rounded lg">
                         <a class="underline"
                            href="{% url 'post_details' slug=post.slug %}">{{ post }}</a> - {{ post.author }}</span>
                 {% endfor %}
