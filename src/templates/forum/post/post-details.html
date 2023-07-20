@@ -50,7 +50,7 @@
                                     <div class="w-2/12 mb-2 mr-2 border-r flex flex-col justify-center items-start gap-4">
                                         <a class="font-bold hover:underline"
                                            href="{% url 'profile-page' pk=comment.author.pk %}">{{ comment.author }}</a>
-                                        {% if comment.author.userprofile.profile_picture.url %}
+                                        {% if comment.author.userprofile.profile_picture %}
                                             <img class="w-1/3 rounded-full"
                                                  src="{{ comment.author.userprofile.profile_picture.url }}" alt="">
                                         {% endif %}
