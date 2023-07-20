@@ -29,7 +29,7 @@
         <hr>
         <div class="m-12">
             <div class="border-2 rounded-lg p-4 mb-4">
-                <h1 class="text-4xl text-white mb-12 border-b-2 pb-2">{{ post.title }}</h1>
+                <h1 class="text-4xl text-white font-bold mb-12 border-b-2 pb-2">{{ post.title }}</h1>
                 <p class="text-xl text-white mb-12">{{ post.body }}</p>
                 {% if request.user.pk == comment.author.pk or request.user.is_staff or request.user.is_superuser %}
                     <div class="mb-2 flex gap-4 justify-end">
