@@ -2082,6 +2082,11 @@ input:checked + .toggle-bg{
   padding-right: 2.75rem;
 }
 
+.px-14{
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+}
+
 .pb-12{
   padding-bottom: 3rem;
 }
