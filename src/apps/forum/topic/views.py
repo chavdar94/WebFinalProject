@@ -1,3 +1,5 @@
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 from django.db.models import Q
@@ -30,7 +32,8 @@ class ForumPage(views.ListView):
         if pattern:
             vector = SearchVector('title', 'body', 'topic__name')
             query = SearchQuery(pattern)
-            queryset = queryset.annotate(rank=SearchRank(vector, query)).filter(rank__gte=0.001).order_by('-rank')
+            queryset = queryset.annotate(rank=SearchRank(vector, query)).filter(
+                rank__gte=0.001).order_by('-rank')
 
             new_queryset = self.model.objects.filter(
                 Q(topic__name__icontains=pattern) |
@@ -41,7 +44,8 @@ class ForumPage(views.ListView):
             combined_queryset = set(queryset) | set(new_queryset)
 
             # Convert the combined set back to a queryset
-            queryset = self.model.objects.filter(pk__in=[obj.pk for obj in combined_queryset])
+            queryset = self.model.objects.filter(
+                pk__in=[obj.pk for obj in combined_queryset])
 
         return queryset
 
@@ -80,3 +84,11 @@ class TopicCreate(GroupRequiredMixin, auth_mixins.LoginRequiredMixin, views.Crea
     form_class = TopicCreateForm
     template_name = 'forum/topics/topic-create.html'
     success_url = reverse_lazy('forum_topics')
+
+    def form_valid(self, form):
+        if Topic.objects.filter(name=form.cleaned_data['name']).exists():
+            form.add_error(
+                'name', f'A topic with name ` {form.cleaned_data["name"]} ` already exists, please try another one or check the existing one.')
+            return self.form_invalid(form)
+
+        return super().form_valid(form)
