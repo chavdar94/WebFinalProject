@@ -68,7 +68,10 @@
                                         {% if request.user.pk == comment.author.pk or request.user.is_staff or request.user.is_superuser %}
                                             <p class="break-all w-5/6">{{ comment.body }}</p>
                                             <div class="w-1/6 mb-2 flex flex-col gap-4 justify-end items-end">
-                                                <button class="text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-14 py-2.5 text-center" onclick="location.href='{% url 'comment_edit' slug=post.slug pk=comment.pk %}'">Edit</button>
+                                                <button class="text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-14 py-2.5 text-center"
+                                                        onclick="location.href='{% url 'comment_edit' slug=post.slug pk=comment.pk %}'">
+                                                    Edit
+                                                </button>
                                                 <form method="POST"
                                                       action="{% url 'comment_delete' slug=post.slug pk=comment.pk %}">
                                                     {% csrf_token %}
