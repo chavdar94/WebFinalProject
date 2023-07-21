@@ -6,6 +6,11 @@
     </div>
 
     <ul class="flex justify-between items-center">
+        {% if request.user.is_authenticated and request.user.is_staff %}
+            <li class='ml-4'><a
+                    class="font-['Poppins'] text-xl hover:bg-slate-300 hover:text-black hover:rounded-2xl hover:px-4 hover:py-1.5 hover:backdrop-blur-md"
+                    href="{% url 'admin:index' %}">Admin panel</a></li>
+        {% endif %}
         <li class='ml-4'><a
                 class="font-['Poppins'] text-xl hover:bg-slate-300 hover:text-black hover:rounded-2xl hover:px-4 hover:py-1.5 hover:backdrop-blur-md"
                 href="{% url 'home' %}">Home</a></li>
@@ -26,7 +31,8 @@
                 <span class="sr-only">Open user menu</span>
                 {% if user.userprofile.profile_picture %}
                     <p class='mx-2 rounded-full bg-slate-300 shadow-2xl hover:bg-slate-400'>
-                        <img class="h-12 w-12 rounded-full" src="{{ request.user.userprofile.profile_picture.url }}" alt="">
+                        <img class="h-12 w-12 rounded-full" src="{{ request.user.userprofile.profile_picture.url }}"
+                             alt="">
                     </p>
                 {% else %}
                     <p class='px-3 text-black text-xl mx-2 py-1.5  rounded-full bg-slate-300 shadow-2xl hover:bg-slate-400'>
