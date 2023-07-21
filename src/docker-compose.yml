@@ -11,15 +11,13 @@ services:
       - ./envs/.env
     depends_on:
       - postgres
+
   postgres:
     image: postgres
     restart: always
     ports:
       - "5432:5432"
-    environment:
-      POSTGRES_PASSWORD: mypass
-      POSTGRES_USER: postgres
-      POSTGRES_DB: web_final
-      PGDATA: /var/lib/postgresql/data/pgdata
+    env_file:
+      - ./envs/.env
     volumes:
       - ./postgresql:/var/lib/postgresql/data
