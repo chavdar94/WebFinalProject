@@ -1,6 +1,8 @@
 from django.contrib import admin
 
 from django.contrib.auth import admin as auth_admin, get_user_model
+from django.utils.html import format_html
+from django.urls import reverse
 from .forms import RegisterForm
 from .models import UserProfile
 from ..forum.models import Like
@@ -14,7 +16,7 @@ class ProfileInline(admin.StackedInline):
 
 @admin.register(UserModel)
 class AppUserAdmin(auth_admin.UserAdmin):
-    ordering = ('email',)
+    ordering = ('pk', 'email',)
     list_display = ('pk', 'email', 'date_joined', 'last_login',
                     'is_superuser', 'is_staff')
     list_filter = ()
