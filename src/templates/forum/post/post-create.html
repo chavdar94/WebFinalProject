@@ -28,7 +28,7 @@
             {% csrf_token %}
             <div class="mx-auto mt-2 w-1/2 flex gap-6">
                 <button class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">
-                    Create topic
+                    Create post
                 </button>
                 <a href="{% url 'topic_page' slug=topic.slug %}"
                    class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">Cancel</a>
