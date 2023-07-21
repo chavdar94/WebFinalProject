@@ -10,9 +10,10 @@ class NoDjangoAdminForEndUserMiddleware:
         if request.path.startswith("/admin/"):
             if not request.user.is_authenticated or not request.user.is_staff:
                 raise Http404()
-        response = self.get_response(request)
-        return response
+        return None  # Return None when not raising Http404
 
     def __call__(self, request, *args, **kwargs):
-        self._middleware(request, *args, **kwargs)
-        return self.get_response(request, *args, **kwargs)
+        response = self._middleware(request, *args, **kwargs)
+        if response is None:
+            response = self.get_response(request, *args, **kwargs)
+        return response
