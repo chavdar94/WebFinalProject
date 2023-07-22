@@ -199,6 +199,6 @@ def permission_denied(request, exception):
     return render(request, '404.html', context, status=403)
 
 
-def server_error(request, exception):
+def server_error(request):
     context = {}
     return render(request, '404.html', context, status=500)
