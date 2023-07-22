@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.auth import models as auth_models, get_user_model
 from django.utils import timezone
 from django.shortcuts import reverse
-from django.contrib.auth.models import Group
 
 from .managers import AppUserManager
+from .validators import validate_file_size
 
 
 class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
@@ -75,6 +75,7 @@ class UserProfile(models.Model):
         upload_to='profile-pictures',
         null=True,
         blank=True,
+        validators=(validate_file_size,),
     )
 
     objects = models.Manager()
