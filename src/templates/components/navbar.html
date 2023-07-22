@@ -1,15 +1,15 @@
 <nav class="navbar text-white flex justify-between px-12 w-full h-[72px] backdrop-blur-md">
     <div class="flex justify-between items-center">
-    <span class="logo text-4xl font-['Poppins']">
-      <a href="{% url 'home' %}">Dev Forum</a>
-    </span>
+        <span class="logo text-4xl font-['Poppins']">
+            <a href="{% url 'home' %}">Dev Forum</a>
+        </span>
     </div>
 
     <ul class="flex justify-between items-center">
         {% if request.user.is_authenticated and request.user.is_staff %}
-            <li class='ml-4'><a
-                    class="font-['Poppins'] text-xl hover:bg-slate-300 hover:text-black hover:rounded-2xl hover:px-4 hover:py-1.5 hover:backdrop-blur-md"
-                    href="{% url 'admin:index' %}">Admin panel</a></li>
+        <li class='ml-4'><a
+                class="font-['Poppins'] text-xl hover:bg-slate-300 hover:text-black hover:rounded-2xl hover:px-4 hover:py-1.5 hover:backdrop-blur-md"
+                href="{% url 'admin:index' %}">Admin panel</a></li>
         {% endif %}
 
         <li class='ml-4'><a
@@ -22,52 +22,50 @@
                 class="font-['Poppins'] text-xl hover:bg-slate-300 hover:text-black hover:rounded-2xl hover:px-4 hover:py-1.5 hover:backdrop-blur-md"
                 href="{% url 'forum_topics' %}">Topics</a></li>
         {% if request.user.groups.all.0.name == 'moderators' or request.user.is_superuser %}
-            <li class="topic-bt-txt text-black text-xl ml-10 py-1.5 rounded-2xl bg-orange-400 shadow-2xl font-bold font-['Poppins'] inline-block hover:bg-orange-600 ">
-                <a class="btn-txt px-8 py-1.5 relative" href="{% url 'topic_create' %}">NEW TOPIC</a></li>
+        <li
+            class="topic-bt-txt text-black text-xl ml-10 py-1.5 rounded-2xl bg-orange-400 shadow-2xl font-bold font-['Poppins'] inline-block hover:bg-orange-600 ">
+            <a class="btn-txt px-8 py-1.5 relative" href="{% url 'topic_create' %}">NEW TOPIC</a></li>
         {% endif %}
 
         {% if request.user.is_authenticated %}
-            <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
-                    class="flex mx-3 text-sm rounded-full md:mr-0" type="button">
-                <span class="sr-only">Open user menu</span>
-                {% if user.userprofile.profile_picture %}
-                    <p class='mx-2 rounded-full bg-slate-300 shadow-2xl hover:bg-slate-400'>
-                        <img class="h-12 w-12 rounded-full" src="{{ request.user.userprofile.profile_picture.url }}"
-                             alt="">
-                    </p>
-                {% else %}
-                    <p class='px-3 text-black text-xl mx-2 py-1.5  rounded-full bg-slate-300 shadow-2xl hover:bg-slate-400'>
-                        <i class="fa-solid fa-user"></i>
-                    </p>
-                {% endif %}
-            </button>
+        <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
+            class="flex mx-3 text-sm rounded-full md:mr-0" type="button">
+            <span class="sr-only">Open user menu</span>
+            {% if user.userprofile.profile_picture %}
+            <p class='mx-2 rounded-full bg-slate-300 shadow-2xl hover:bg-slate-400'>
+                <img class="h-12 w-12 rounded-full" src="{{ request.user.userprofile.profile_picture.url }}" alt="">
+            </p>
+            {% else %}
+            <p class='px-3 text-black text-xl mx-2 py-1.5  rounded-full bg-slate-300 shadow-2xl hover:bg-slate-400'>
+                <i class="fa-solid fa-user"></i>
+            </p>
+            {% endif %}
+        </button>
 
-            <div id="dropdownAvatar" class="hidden bg-slate-300 divide-y divide-slate-500 rounded-lg shadow w-44">
-                <div class="menu-inline email px-4 py-3 text-sm text-gray-900 md:top-24 overflow-hidden">
-                    <div class="font-semibold">{{ request.user.user_name }}</div>
-                </div>
-                <ul class="menu-inline inner py-2 text-sm text-gray-700" aria-labelledby="dropdownUserAvatarButton">
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-slate-400 font-semibold">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'profile-page' pk=request.user.pk %}"
-
-                           class="block px-4 py-2 hover:bg-slate-400 font-semibold">Settings</a>
-                    </li>
-                </ul>
-                <div class="menu-inline py-2">
-                    <a href="{% url 'sign-out' %}"
-                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-400 font-semibold">Sign
-                        out</a>
-                </div>
+        <div id="dropdownAvatar" class="hidden bg-slate-300 divide-y divide-slate-500 rounded-lg shadow w-44">
+            <div class="menu-inline email px-4 py-3 text-sm text-gray-900 md:top-24 overflow-hidden">
+                <div class="font-semibold">{{ request.user.user_name }}</div>
             </div>
+            <ul class="menu-inline inner py-2 text-sm text-gray-700" aria-labelledby="dropdownUserAvatarButton">
+                <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-slate-400 font-semibold">Dashboard</a>
+                </li>
+                <li>
+                    <a href="{% url 'profile-page' pk=request.user.pk %}"
+                        class="block px-4 py-2 hover:bg-slate-400 font-semibold">Settings</a>
+                </li>
+            </ul>
+            <div class="menu-inline py-2">
+                <a href="{% url 'sign-out' %}"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-400 font-semibold">Sign
+                    out</a>
+            </div>
+        </div>
         {% else %}
 
-            <li class='text-black text-xl mx-2 py-1.5  rounded-full bg-slate-300 shadow-2xl hover:bg-slate-400'><a
-                    class="px-3 py-1.5" href="{% url 'sign-in' %}"><i
-                    class="fa-solid fa-right-to-bracket fa-lg"></i></a>
-            </li>
+        <li class='text-black text-xl mx-2 py-1.5  rounded-full bg-slate-300 shadow-2xl hover:bg-slate-400'><a
+                class="px-3 py-1.5" href="{% url 'sign-in' %}"><i class="fa-solid fa-right-to-bracket fa-lg"></i></a>
+        </li>
         {% endif %}
     </ul>
 </nav>
