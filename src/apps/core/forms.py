@@ -3,6 +3,7 @@ from django.contrib.auth import forms as auth_forms, get_user_model, login, auth
 from django.core.exceptions import ValidationError
 
 from .models import UserProfile
+from .validators import validate_file_size
 
 UserModel = get_user_model()
 
@@ -81,6 +82,11 @@ class PasswordChangeForm(auth_forms.PasswordChangeForm):
 
 class ProfileUpdateForm(forms.ModelForm):
     # password = None
+    profile_picture = forms.FileField(
+        required=False,
+        widget=forms.FileInput(),
+        validators=(validate_file_size,)
+    )
 
     class Meta:
         model = UserProfile
