@@ -84,12 +84,14 @@ class ProfileView(views.View):
 
     def get(self, request, pk):
         user = get_object_or_404(UserModel, pk=pk)
-        user_comments = Comment.objects.select_related('author').filter(author=user)
+        user_comments = Comment.objects.select_related(
+            'author').filter(author=user)
 
         paginator = Paginator(user_comments, 8)
         page_number = request.GET.get('page') or 1
         page_obj = paginator.get_page(page_number)
-        user_posts = Post.objects.select_related('author').filter(author=user)[:4]
+        user_posts = Post.objects.select_related(
+            'author').filter(author=user)[:4]
 
         try:
             profile = UserProfile.objects.filter(user_id=user.pk).get()
@@ -187,16 +189,16 @@ class ProfileDeleteView(auth_mixins.UserPassesTestMixin, auth_mixins.LoginRequir
 
 # http error views
 
-def bad_request(request):
+def bad_request(request, exception):
     context = {}
     return render(request, '404.html', context, status=400)
 
 
-def permission_denied(request):
+def permission_denied(request, exception):
     context = {}
     return render(request, '404.html', context, status=403)
 
 
-def server_error(request):
+def server_error(request, exception):
     context = {}
     return render(request, '404.html', context, status=500)
