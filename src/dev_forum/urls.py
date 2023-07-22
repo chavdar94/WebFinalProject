@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.conf.urls import handler500, handler400, handler403
+from src.apps.core.views import bad_request, permission_denied, server_error
 
 
 urlpatterns = [
@@ -26,10 +27,9 @@ urlpatterns = [
 ]
 
 if not settings.DEBUG:
-    handler400 = 'apps.core.views.bad_request'
-    handler403 = 'apps.core.views.permission_denied'
-    handler404 = 'apps.core.views.page_not_found'
-    handler500 = 'apps.core.views.server_error'
+    handler400 = bad_request
+    handler403 = permission_denied
+    handler500 = server_error
 
 if settings.DEBUG:
     from django.conf.urls.static import static
