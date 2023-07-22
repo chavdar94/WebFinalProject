@@ -3,7 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.conf.urls import handler500, handler400, handler403
-from src.apps.core.views import bad_request, permission_denied, server_error
+from ..apps.core.views import bad_request, permission_denied, server_error
 
 
 urlpatterns = [
