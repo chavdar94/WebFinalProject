@@ -17,6 +17,7 @@ class Topic(models.Model):
 
     slug = models.SlugField(
         max_length=50,
+        unique=True,
     )
 
     def save(self, *args, **kwargs):
