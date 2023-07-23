@@ -7,11 +7,13 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
-COPY src /app/
-COPY .gitignore /app/
-COPY docker-compose-prod.yml /app/
-COPY Dockerfile /app/
-COPY package.json /app/
-COPY package-lock.json /app/
-COPY README.md /app/
-COPY tailwind.config.js /app/
+COPY manage.py /app/manage.py
+COPY nginx /app/nginx
+COPY media /app/media
+COPY dev_forum /app/dev_forum
+COPY package.json /app/package.json
+COPY package-lock.json /app/package-lock.json
+COPY tailwind.config.js /app/tailwind.config.js
+COPY apps /app/apps
+COPY static_files /app/static_files
+COPY templates /app/templates

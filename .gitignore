@@ -19,7 +19,6 @@ staticfiles
 *.env
 envs/
 
-forum.env
 # Backup files #
 *.bak
 
@@ -151,4 +150,4 @@ GitHub.sublime-settings
 .history
 
 docker-compose.yml
-docker-compose-prod.yml
+docker-compose.yml
