@@ -1,8 +1,6 @@
 from django.contrib import admin
 
 from django.contrib.auth import admin as auth_admin, get_user_model
-from django.utils.html import format_html
-from django.urls import reverse
 from .forms import RegisterForm
 from .models import UserProfile
 from ..forum.models import Like
