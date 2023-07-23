@@ -55,9 +55,9 @@ class SignIn(auth_views.LoginView):
 
     def form_valid(self, form):
         remember_me = form.cleaned_data['remember_me']
-        if remember_me:
-            expiry_duration = timedelta(days=31)
-            self.request.session.set_expiry(expiry_duration.total_seconds())
+        if not remember_me:
+            self.request.session.clear()
+            self.request.session.set_expiry(0)
         return super().form_valid(form)
 
     def form_invalid(self, form):
