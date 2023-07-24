@@ -100,6 +100,7 @@ class ProfileView(views.View):
             profile = UserProfile.objects.filter(user_id=user.pk).get()
         except ObjectDoesNotExist:
             profile = UserProfile.objects.create(user=user)
+	print(profile.profile_picture)
 
         context = {
             'profile': profile,
