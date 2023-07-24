@@ -122,7 +122,10 @@ class ProfileEditView(auth_mixins.UserPassesTestMixin, auth_mixins.LoginRequired
 
         form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            form.save()
+            obj = form.save(commit=False)
+            pp = form.cleaned_data.get('profile_picture')
+            obj.profile_picture = pp
+            obj.save()
 
             return redirect('profile-page', pk=self.kwargs['pk'])
 
