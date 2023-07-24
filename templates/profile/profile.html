@@ -17,9 +17,9 @@
                         {{ profile.user.user_name|capfirst }}'s
                         Profile</h1>
                     <p class="mb-3 font-normal text-white text-2xl">Email: {{ user.email }}</p>
-                    {% if user.userprofile.first_name %}
+                    {% if profile.first_name %}
                     <p class="mb-3 font-normal text-white text-2xl">First
-                        name: {{ user.userprofile.first_name }}</p>
+                        name: {{ profile.first_name }}</p>
                     {% else %}
                     <div class="flex p-2 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 " role="alert">
                         <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
@@ -36,9 +36,9 @@
                     {% endif %}
 
 
-                    {% if user.userprofile.last_name %}
+                    {% if profile.last_name %}
                     <p class="mb-3 font-normal text-white text-2xl">Last
-                        name: {{ user.userprofile.last_name }}</p>
+                        name: {{ profile.last_name }}</p>
                     {% else %}
                     <div class="flex p-2 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 items-center"
                         role="alert">
@@ -55,8 +55,8 @@
                     </div>
                     {% endif %}
 
-                    {% if user.userprofile.age %}
-                    <p class="mb-3 font-normal text-white text-2xl">Age: {{ user.userprofile.age }}</p>
+                    {% if profile.age %}
+                    <p class="mb-3 font-normal text-white text-2xl">Age: {{ profile.age }}</p>
                     {% else %}
                     <div class="flex p-2 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
                         <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
@@ -72,8 +72,8 @@
                     </div>
                     {% endif %}
 
-                    {% if user.userprofile.city %}
-                    <p class="mb-3 font-normal text-white text-2xl">City: {{ user.userprofile.city }}</p>
+                    {% if profile.city %}
+                    <p class="mb-3 font-normal text-white text-2xl">City: {{ profile.city }}</p>
                     {% else %}
                     <div class="flex p-2 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
                         <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
