@@ -45,7 +45,7 @@
                 <div class="w-full flex items-end justify-between">
                     <div class="text-xl text-slate-300 justify-start items-end">
                         Likes: {{ likes }}</div>
-                    {% if request.user.pk == comment.author.pk or request.user.is_staff or request.user.is_superuser %}
+                    {% if request.user.is_authenticated and request.user.pk == comment.author.pk or request.user.is_staff or request.user.is_superuser %}
                         <div class="mb-2 flex gap-4 justify-end">
                             <a class="text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center"
                                href="{% url 'post_edit' slug=post.slug %}">Edit post</a>
