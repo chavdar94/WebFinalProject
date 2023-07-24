@@ -1,4 +1,6 @@
 from datetime import timedelta
+from urllib.parse import urlencode
+
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
@@ -58,6 +60,7 @@ class SignIn(auth_views.LoginView):
         if not remember_me:
             self.request.session.clear()
             self.request.session.set_expiry(0)
+
         return super().form_valid(form)
 
     def form_invalid(self, form):

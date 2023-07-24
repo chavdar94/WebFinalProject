@@ -124,12 +124,14 @@ class Like(models.Model):
         Post,
         on_delete=models.CASCADE,
         null=True,
+        blank=True,
     )
 
     comment = models.ForeignKey(
         Comment,
         on_delete=models.CASCADE,
         null=True,
+        blank=True,
     )
 
     def __str__(self):

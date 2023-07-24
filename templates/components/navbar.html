@@ -6,7 +6,7 @@
     </div>
 
     <ul class="flex justify-between items-center">
-        {% if request.user.is_authenticated and request.user.is_staff %}
+        {% if request.user.is_authenticated and request.user.is_superuser or request.user.is_staff %}
         <li class='ml-4'><a
                 class="font-['Poppins'] text-xl hover:bg-slate-300 hover:text-black hover:rounded-2xl hover:px-4 hover:py-1.5 hover:backdrop-blur-md"
                 href="{% url 'admin:index' %}">Admin panel</a></li>
@@ -21,7 +21,7 @@
         <li class='ml-4'><a
                 class="font-['Poppins'] text-xl hover:bg-slate-300 hover:text-black hover:rounded-2xl hover:px-4 hover:py-1.5 hover:backdrop-blur-md"
                 href="{% url 'forum_topics' %}">Topics</a></li>
-        {% if request.user.groups.all.0.name == 'moderators' or request.user.is_superuser %}
+        {% if request.user.is_staff or request.user.is_superuser %}
         <li
             class="topic-bt-txt text-black text-xl ml-10 py-1.5 rounded-2xl bg-orange-400 shadow-2xl font-bold font-['Poppins'] inline-block hover:bg-orange-600 ">
             <a class="btn-txt px-8 py-1.5 relative" href="{% url 'topic_create' %}">NEW TOPIC</a></li>

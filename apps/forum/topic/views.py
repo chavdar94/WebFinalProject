@@ -18,6 +18,7 @@ class ForumPage(views.ListView):
     model = Post
     template_name = 'forum/forum.html'
     paginate_by = 7
+    ordering = ['-updated']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()

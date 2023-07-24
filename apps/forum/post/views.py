@@ -3,9 +3,10 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
 
 from .forms import PostCreateForm, CommentCreateForm, PostUpdateForm, PostDeleteForm, CommentEditForm, CommentDeleteForm
-from ..models import Post, Topic, Comment
+from ..models import Post, Topic, Comment, Like
 
 
 class PostCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
@@ -41,11 +42,17 @@ class PostDetailsPage(views.View):
     def get(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
         comments = post.comment_set.all()
+        try:
+            has_liked = post.like_set.filter(user=request.user).exists()
+        except:
+            has_liked = False
 
         context = {
             'post': post,
             'comments': comments,
             'form': CommentCreateForm(),
+            'likes': post.like_set.count(),
+            'has_liked': has_liked,
         }
 
         return render(request, 'forum/post/post-details.html', context)
@@ -110,6 +117,26 @@ class PostDeleteView(auth_mixins.UserPassesTestMixin, auth_mixins.LoginRequiredM
         raise Http404()
 
 
+@login_required
+def post_like(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    user = request.user
+
+    kwargs = {
+        'post': post,
+        'user': user,
+    }
+
+    like_obj = Like.objects.filter(**kwargs).first()
+    if like_obj:
+        like_obj.delete()
+    else:
+        new_like_object = Like(**kwargs)
+        new_like_object.save()
+
+    return redirect(request.META['HTTP_REFERER'] + f'#{slug}')
+
+
 class CommentEditView(auth_mixins.UserPassesTestMixin, auth_mixins.LoginRequiredMixin, views.UpdateView):
     form_class = CommentEditForm
     template_name = 'forum/post/comment-edit.html'
@@ -142,3 +169,23 @@ class CommentDeleteView(auth_mixins.UserPassesTestMixin, auth_mixins.LoginRequir
 
     def handle_no_permission(self):
         raise Http404()
+
+
+@login_required
+def comment_like(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    user = request.user
+
+    kwargs = {
+        'comment': comment,
+        'user': user,
+    }
+
+    like_obj = Like.objects.filter(**kwargs).first()
+    if like_obj:
+        like_obj.delete()
+    else:
+        new_like_object = Like(**kwargs)
+        new_like_object.save()
+
+    return redirect(request.META['HTTP_REFERER'] + f'#{pk}')
