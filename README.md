@@ -1,6 +1,6 @@
 [Link to website in aws](http://ec2-13-51-90-106.eu-north-1.compute.amazonaws.com/)
 
-## Used Stack:
+## Tech Stack:
 
 - Django
 - TailwindCSS
