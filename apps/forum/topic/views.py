@@ -18,7 +18,6 @@ class ForumPage(views.ListView):
     model = Post
     template_name = 'forum/forum.html'
     paginate_by = 7
-    ordering = ['-updated']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -48,7 +47,9 @@ class ForumPage(views.ListView):
             queryset = self.model.objects.filter(
                 pk__in=[obj.pk for obj in combined_queryset])
 
-        return queryset
+            return queryset
+
+        return queryset.order_by('-created')
 
     def __get_pattern(self):
         pattern = self.request.GET.get('pattern', None)
@@ -68,7 +69,7 @@ class TopicPage(FormMixin, views.ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        return qs.filter(topic_id__slug=self.kwargs['slug'])
+        return qs.filter(topic_id__slug=self.kwargs['slug']).order_by('-updated')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
