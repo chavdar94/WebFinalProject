@@ -10,7 +10,7 @@
 # Images
 
 - Login Page
-![Login Page](site%20images/login-page.png)
+![Login Page](https://github.com/chavdar94/WebFinalProject/blob/main/site%20images/login-page.png)
 - Register Page
 ![Register Page](site%20images/sign-up-page.png)
 - Home Page
