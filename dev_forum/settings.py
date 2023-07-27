@@ -1,8 +1,6 @@
+from django.urls import reverse_lazy
 from pathlib import Path
 import os
-
-from django.urls import reverse_lazy
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -213,7 +211,8 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console'],
-            'level': 'INFO',  # Set the desired log level here (INFO, DEBUG, etc.)
+            # Set the desired log level here (INFO, DEBUG, etc.)
+            'level': 'INFO',
             'propagate': False,
         },
     },
