@@ -1,7 +1,16 @@
 from django.urls import reverse_lazy
 from pathlib import Path
 import os
+import dotenv
 
+<<<<<<< Updated upstream
+=======
+from django.urls import reverse_lazy
+
+dotenv.load_dotenv()
+
+
+>>>>>>> Stashed changes
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', None)
