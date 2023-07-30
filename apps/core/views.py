@@ -1,6 +1,4 @@
-from datetime import timedelta
-from urllib.parse import urlencode
-
+from django.conf import settings
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
@@ -191,6 +189,22 @@ class ProfileDeleteView(auth_mixins.UserPassesTestMixin, auth_mixins.LoginRequir
 
     def handle_no_permission(self):
         raise Http404()
+
+
+class PasswordResetView(auth_views.PasswordResetView):
+    template_name = 'account/password-reset.html'
+
+
+class PasswordResetDone(auth_views.PasswordResetDoneView):
+    template_name = 'account/password-reset-done.html'
+
+
+class PasswordResetConfirm(auth_views.PasswordResetConfirmView):
+    template_name = 'account/password-reset-confirm.html'
+
+
+class PasswordResetComplete(auth_views.PasswordResetCompleteView):
+    template_name = 'account/password-reset-complete.html'
 
 
 # http error views

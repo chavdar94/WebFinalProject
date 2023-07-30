@@ -22,10 +22,6 @@
             </div>
             <p class="text-slate-300 text-lg">Created on: {{ post.created|date:'d M, Y' }}</p>
 
-            {% if request.user.pk == post.author.pk or request.user.is_superuser or request.user.is_staff %}
-
-            {% endif %}
-
         </div>
         <div class="m-12">
             <div class="border-2 rounded-lg p-4 mb-4">

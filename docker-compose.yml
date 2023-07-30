@@ -4,6 +4,7 @@ services:
   web:
     image: choko2/dev_forum
     command: gunicorn dev_forum.wsgi:application --bind 0.0.0.0:8000
+    build: .
     volumes:
       - /tmp/dev_forum/static:/app/static
       - /tmp/dev_forum/media:/app/media

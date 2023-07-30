@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.contrib.auth import views as auth_views
+from apps.core.views import PasswordResetView, PasswordResetDone, PasswordResetConfirm, PasswordResetComplete
 # from django.conf.urls import handler500, handler400, handler403
 
 
@@ -15,13 +16,13 @@ urlpatterns = [
     path('', include('apps.core.urls')),
     path('forum/', include('apps.forum.urls')),
     # password reset urls
-    path('reset_password/', auth_views.PasswordResetView.as_view(),
+    path('reset_password/', PasswordResetView.as_view(),
          name='reset_password'),
-    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(),
+    path('reset_password_sent/', PasswordResetDone.as_view(),
          name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(),
+    path('reset/<uidb64>/<token>/', PasswordResetConfirm.as_view(),
          name='password_reset_confirm'),
-    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(),
+    path('reset_password_complete/', PasswordResetComplete.as_view(),
          name='password_reset_complete'),
 ]
 
