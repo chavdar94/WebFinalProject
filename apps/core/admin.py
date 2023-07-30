@@ -20,6 +20,7 @@ class AppUserAdmin(auth_admin.UserAdmin):
     list_filter = ()
     add_form = RegisterForm
     inlines = auth_admin.UserAdmin = (ProfileInline,)
+    search_fields = ('email',)
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),
