@@ -9,6 +9,8 @@ urlpatterns = [
     # topics
     path('topics/', topic_views.AllTopicsView.as_view(), name='forum_topics'),
     path('topics/<str:slug>/', topic_views.TopicPage.as_view(), name='topic_page'),
+    path('topics/<str:slug>/delete/',
+         topic_views.TopicDelete.as_view(), name='topic_delete'),
     path('create/topics/', topic_views.TopicCreate.as_view(), name='topic_create'),
 
     # posts
