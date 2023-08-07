@@ -1,11 +1,12 @@
-from django.forms.models import BaseModelForm
-from django.http import HttpResponse
+from django.http import Http404
+from django.http.response import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 from django.db.models import Q
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
 from django.views.generic.edit import FormMixin
+
 
 from .forms import TopicCreateForm
 from ..mixins.moderator_group_mixin import GroupRequiredMixin
@@ -94,3 +95,16 @@ class TopicCreate(GroupRequiredMixin, auth_mixins.LoginRequiredMixin, views.Crea
             return self.form_invalid(form)
 
         return super().form_valid(form)
+
+
+class TopicDelete(auth_mixins.LoginRequiredMixin, auth_mixins.UserPassesTestMixin, views.DeleteView):
+    model = Topic
+    success_url = reverse_lazy('forum_topics')
+    template_name = 'forum/topics/topic-delete.html'
+    success_url = reverse_lazy('forum_topics')
+
+    def test_func(self):
+        return self.request.user.is_superuser or self.request.user.groups.filter(name='admins').exists()
+
+    def handle_no_permission(self):
+        raise Http404()

@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="w-full h-full flex justify-center items-center">
+  <div
+    class="card-item w-2/3 flex flex-col gap-6 items-center justify-center rounded-xl mt-6 absolute delete-box backdrop-blur-md">
+    <h1 class="error-text text-red-500 text-2xl font-bold">Are you sure you want to delete topic ` {{ object.name }} `
+      and all posts in
+      it?</h1>
+    <form action="{% url 'topic_delete' slug=object.slug %}" method='post'>
+      {{ form }}
+      <button
+        class="del-btn text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center mr-2">Delete
+        topic</button>
+      {% csrf_token %}
+    </form>
+  </div>
+</div>
+{% endblock %}
