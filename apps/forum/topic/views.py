@@ -82,7 +82,7 @@ class TopicPage(FormMixin, views.ListView):
 
 
 class TopicCreate(GroupRequiredMixin, auth_mixins.LoginRequiredMixin, views.CreateView):
-    group_required = ['Moderators', 'Admins']
+    allowed_groups = ['Moderators', 'Admins']
     form_class = TopicCreateForm
     template_name = 'forum/topics/topic-create.html'
     success_url = reverse_lazy('forum_topics')
