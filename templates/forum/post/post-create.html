@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="card-item w-3/4 h-[700px] mx-auto my-12 opacity-1 border rounded-xl shadow bg-transparent border-gray-700 backdrop-blur-xl flex flex-col justify-center items-center">
-        <h1 class="text-slate-300 text-4xl font-bold mt-8 font-['Poppins']">Create new post for ` {{ topic }} ` topic</h1>
+        <h1 class="topic-create-title text-slate-300 text-4xl font-bold mt-8 font-['Poppins']">Create new post for ` {{ topic }} ` topic</h1>
         <form action="{% url 'post_create' slug=topic.slug %}" method="post" class="flex flex-col w-3/4 m-auto mt-12">
             {% if form.non_field_errors %}
                 <ul class="errorlist mb-2">
@@ -14,7 +14,7 @@
             {% for field in form %}
                 <div class="mb-6 flex flex-col">
                     <label for="id_{{ field.name }}"
-                           class="text-slate-300 text-4xl font-semibold mb-2 font-['Poppins']">{{ field.label }}</label>
+                           class="form-label-title text-slate-300 text-4xl font-semibold mb-2 font-['Poppins']">{{ field.label }}</label>
                     {% if field.errors %}
                         <ul class="errorlist mb-2">
                             {% for error in field.errors %}
@@ -26,7 +26,7 @@
                 </div>
             {% endfor %}
             {% csrf_token %}
-            <div class="mx-auto mt-2 w-1/2 flex gap-6">
+            <div class="post-create-btns mx-auto mt-2 w-1/2 flex gap-6">
                 <button class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">
                     Create post
                 </button>

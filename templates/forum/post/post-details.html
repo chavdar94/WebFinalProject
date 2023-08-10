@@ -20,13 +20,13 @@
                 </p>
 
             </div>
-            <p class="text-slate-300 text-lg">Created on: {{ post.created|date:'d M, Y' }}</p>
+            <p class="created-on text-slate-300 text-lg">Created on: {{ post.created|date:'d M, Y' }}</p>
 
         </div>
-        <div class="m-12">
+        <div class="details-box m-12">
             <div class="border-2 rounded-lg p-4 mb-4">
                 <div class="flex justify-between w-full mb-4 border-b-2">
-                    <h1 class="text-4xl text-white font-bold pb-2">{{ post.title }}</h1>
+                    <h1 class="post-title text-4xl text-white font-bold pb-2">{{ post.title }}</h1>
                     <div class="pb-2">
                         <a href="{% url 'post_like' slug=post.slug %}">
                             {% if has_liked %}
@@ -43,9 +43,9 @@
                         Likes: {{ likes }}</div>
                     {% if request.user.is_authenticated or request.user == post.author or request.user.is_staff or request.user.is_superuser %}
                         <div class="mb-2 flex gap-4 justify-end">
-                            <a class="text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center"
+                            <a class="post-details-btn text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center"
                                href="{% url 'post_edit' slug=post.slug %}">Edit post</a>
-                            <a class="text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center"
+                            <a class="post-details-btn text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center"
                                href="{% url 'post_delete' slug=post.slug %}">Delete post</a>
                         </div>
                     {% endif %}
@@ -57,7 +57,7 @@
                     {% for comment in comments %}
                         <div id="{{ comment.pk }}" class="border-2 rounded-lg p-4 mb-4">
                             <li class="text-lg text-white my-4">
-                                <div class="flex gap-4">
+                                <div class="comment-responsive-box flex gap-4">
                                     <div class="w-2/12 mb-2 mr-2 border-r flex flex-col justify-center items-start gap-4">
                                         <a class="font-bold hover:underline"
                                            href="{% url 'profile-page' pk=comment.author.pk %}">{{ comment.author }}</a>
@@ -65,7 +65,7 @@
                                             <img class="w-1/3 rounded-full"
                                                  src="{{ comment.author.userprofile.profile_picture.url }}" alt="">
                                         {% endif %}
-                                        <div>
+                                        <div class="user-info">
                                             <p class="text-sm">User from:
                                                 {{ comment.author.date_joined|date:'d M, Y' }}</p>
                                             <p class="text-sm">Total
@@ -80,7 +80,7 @@
                                         <div class="w-1/6 flex flex-col gap-4 justify-end items-end">
                                             {% if request.user.pk == comment.author.pk or request.user.is_staff or request.user.is_superuser %}
                                                 <button
-                                                        class="text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-14 py-2.5 text-center"
+                                                        class="comment-btns text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-14 py-2.5 text-center"
                                                         onclick="location.href='{% url 'comment_edit' slug=post.slug pk=comment.pk %}'">
                                                     Edit
                                                 </button>
@@ -88,7 +88,7 @@
                                                       action="{% url 'comment_delete' slug=post.slug pk=comment.pk %}">
                                                     {% csrf_token %}
                                                     <button
-                                                            class="text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-11 py-2.5 text-center">
+                                                            class="comment-btns text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-11 py-2.5 text-center">
                                                         Delete
                                                     </button>
                                                 </form>
@@ -135,7 +135,7 @@
                     </div>
                 {% endfor %}
                 <button
-                        class="w-1/6 my-4 p-10 text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">
+                        class="comment-btn w-1/6 my-4 p-10 text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">
                     Submit
                 </button>
             </form>

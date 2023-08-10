@@ -1,3 +1,179 @@
+@media (max-width: 600px) {
+    .hero {
+        overflow: hidden;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .navbar {
+        padding: 0;
+        justify-content: center;
+    }
+
+    .hero > header > nav > ul > li {
+        margin-left: 8px;
+    }
+
+    .hero > header > nav > ul > li > a {
+        font-size: 12px;
+    }
+
+    .hero > header > nav > ul > li:not(:last-child) > a:not(:last-child):hover {
+        background: none;
+        color: #ffffff;
+        text-decoration: underline;
+    }
+
+    .parent-card {
+        display: block;
+        width: 90%;
+        margin: auto;
+        text-decoration: underline;
+    }
+
+    .search-bar {
+        width: 80%;
+        margin-bottom: 0;
+    }
+
+    .title-container {
+        margin-bottom: 24px;
+    }
+
+    .main-title {
+        font-size: 2rem;
+    }
+
+    .card-text {
+        font-size: 1.3rem;
+    }
+
+    .card-item > p {
+        font-size: 1.1rem;
+    }
+
+    #dropdownAvatar {
+        min-width: 80%;
+        height: 50px;
+    }
+
+    #dropdownAvatar > .px-4 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .divide-slate-500 > :not([hidden]) ~ :not([hidden]) {
+        border-top-width: 0;
+    }
+
+    .menu-inline,
+    .menu-inline > li {
+        display: inline-block;
+        padding-top: 4px;
+        padding-bottom: 0;
+    }
+
+    .small-topic-bt-txt {
+        height: 20px;
+        width: 50px;
+    }
+
+    .btn-txt {
+        right: 22px;
+        bottom: 12px;
+    }
+
+    .topic-create-title {
+        font-size: 24px;
+        padding-left: 18px;
+    }
+
+    .form-label-title {
+        font-size: 20px;
+    }
+
+    .topic-title {
+        font-size: 24px;
+    }
+
+    .topic-btns {
+        margin-left: 34px;
+        padding-top: 12px;
+    }
+
+    .topic-btn {
+        font-size: 14px;
+        padding: 2px 8px;
+    }
+
+    .card-item {
+        width: 80%;
+    }
+
+    .post-create-btns,
+    .topic-create-btns{
+        width: auto;
+    }
+
+    .created-on {
+        display: none;
+    }
+
+    .details-box {
+        margin: 12px;
+    }
+
+    .post-title {
+        font-size: 18px;
+    }
+
+    .fa-regular {
+        font-size: 22px;
+    }
+
+    .post-details-btn {
+        font-size: 12px;
+        padding: 4px 0;
+    }
+
+    .comment-text {
+        width: 100%;
+        max-width: 200px;
+        margin-left: 24px;
+    }
+
+    .comment-btn {
+        width: 60%;
+    }
+
+    .user-info {
+        display: none;
+    }
+
+    .comment-responsive-box {
+        flex-direction: column;
+    }
+
+    .comment-btns {
+        padding: 0;
+    }
+
+    .hide-container {
+        display: none;
+    }
+
+    .profile-info {
+        width: 100%;
+        margin: 0;
+    }
+
+    .alert-box {
+        width: 125%;
+    }
+}
+
 @media only screen and (min-width: 600px) and  (max-width: 767px) {
     .card-container {
         width: 80%; /* Set the desired fixed width for the cards */
@@ -32,6 +208,7 @@
     .divide-slate-500 > :not([hidden]) ~ :not([hidden]) {
         border-top-width: 0;
     }
+
     .menu-inline,
     .menu-inline > li {
         display: inline-block;
@@ -50,7 +227,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-        .card-container {
+    .card-container {
         width: 80%; /* Set the desired fixed width for the cards */
     }
 
@@ -83,6 +260,7 @@
     .divide-slate-500 > :not([hidden]) ~ :not([hidden]) {
         border-top-width: 0;
     }
+
     .menu-inline,
     .menu-inline > li {
         display: inline-block;
@@ -91,7 +269,7 @@
     }
 
     .email {
-       margin-left: 48px;
+        margin-left: 48px;
     }
 
     .inner {
@@ -111,10 +289,6 @@
 }
 
 @media only screen and (max-width: 768px), (max-width: 1024px) {
-    .card-container {
-        width: 80%;
-    }
-
     .parent-card {
         align-items: center;
     }
@@ -125,10 +299,6 @@
     .topic-bt-txt {
         padding: 4px;
         text-align: center;
-    }
-
-    .btn-txt {
-        padding: 0;
     }
 
     #default-search::placeholder {
@@ -159,11 +329,6 @@
 /* posts */
 
 @media (max-width: 600px), (max-width: 768px) {
-    .all-posts {
-        display: flex;
-        flex-direction: column;
-    }
-
     .topic-card {
         width: 100%;
     }
@@ -220,18 +385,27 @@
         width: 80%;
         margin: 48px auto;
     }
+
     .reset-pwd-container {
         padding: 0;
         width: 90%;
         justify-content: space-between;
     }
+
     .inner-box {
         width: 100%;
     }
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .input-div {
         width: 100%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .all-posts {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0px, 1fr));
     }
 }

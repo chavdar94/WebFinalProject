@@ -43,7 +43,7 @@ class CommentBaseForm(forms.ModelForm):
         fields = ('body',)
         model = Comment
         widgets = {
-            'body': forms.Textarea(attrs={'rows': 5, 'cols': 60}),
+            'body': forms.Textarea(attrs={'rows': 5, 'cols': 40}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -52,7 +52,7 @@ class CommentBaseForm(forms.ModelForm):
 
     def __set_fields_classes(self):
         for field in self.fields.values():
-            field.widget.attrs['class'] = 'rounded-xl bg-slate-300 text-lg font-["Poppins"]'
+            field.widget.attrs['class'] = 'comment-text rounded-xl bg-slate-300 text-lg font-["Poppins"]'
 
 
 class CommentCreateForm(CommentBaseForm):

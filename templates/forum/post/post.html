@@ -1,22 +1,22 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-<div>
+<div class="topic-responsive">
     <div class="text-center mb-10">
-        <h1 class="text-7xl text-white font-bold mb-8 text-center mt-5 mr-36 inline-block pl-32">{{ topic }}</h1>
+        <h1 class="topic-title text-7xl text-white font-bold mb-8 text-center mt-5 mr-36 inline-block pl-32">{{ topic }}</h1>
     </div>
-    <div class="flex gap-6 relative bottom-16 ml-24">
+    <div class="topic-btns flex gap-6 relative bottom-16 ml-24">
         {% if request.user.is_authenticated %}
         <div class="">
             <a href="{% url 'post_create' slug=topic.slug %}"
-                class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">Create
+                class="topic-btn w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">Create
                 new post</a>
         </div>
 
         {% if request.user.is_superuser %}
         <div class="">
             <a href="{% url 'topic_delete' slug=topic.slug %}"
-                class="w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">Delete
+                class="topic-btn w-full text-black bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center">Delete
                 topic</a>
         </div>
     </div>
@@ -45,7 +45,7 @@
         <tbody>
             {% for post in object_list %}
             <tr class="border-2 backdrop-blur-xl">
-                <td data-cell="post" class="px-6 py-4 font-bold text-white text-xl whitespace-nowrap hover:scale-125">
+                <td data-cell="post" class="px-6 py-4 font-bold text-white text-xl whitespace-nowrap hover:scale-105 ease-in duration-300">
                     <a href="{% url 'post_details' slug=post.slug %}">{{ post }}</a>
                 </td>
                 <td data-cell="topic" class="px-6 py-4 font-semibold text-lg text-white">
