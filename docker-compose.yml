@@ -36,4 +36,5 @@ services:
       - ./media:/home/app/web/media
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
+    links:
       - web

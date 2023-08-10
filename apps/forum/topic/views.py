@@ -7,7 +7,6 @@ from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
 from django.views.generic.edit import FormMixin
 
-
 from .forms import TopicCreateForm
 from ..mixins.moderator_group_mixin import GroupRequiredMixin
 
@@ -83,7 +82,7 @@ class TopicPage(FormMixin, views.ListView):
 
 
 class TopicCreate(GroupRequiredMixin, auth_mixins.LoginRequiredMixin, views.CreateView):
-    group_required = ['moderators', 'admins']
+    group_required = ['Moderators', 'Admins']
     form_class = TopicCreateForm
     template_name = 'forum/topics/topic-create.html'
     success_url = reverse_lazy('forum_topics')
@@ -91,7 +90,8 @@ class TopicCreate(GroupRequiredMixin, auth_mixins.LoginRequiredMixin, views.Crea
     def form_valid(self, form):
         if Topic.objects.filter(name=form.cleaned_data['name']).exists():
             form.add_error(
-                'name', f'A topic with name ` {form.cleaned_data["name"]} ` already exists, please try another one or check the existing one.')
+                'name', f'A topic with name ` {form.cleaned_data["name"]} ` already exists, please try another one or '
+                        f'check the existing one.')
             return self.form_invalid(form)
 
         return super().form_valid(form)
@@ -104,7 +104,7 @@ class TopicDelete(auth_mixins.LoginRequiredMixin, auth_mixins.UserPassesTestMixi
     success_url = reverse_lazy('forum_topics')
 
     def test_func(self):
-        return self.request.user.is_superuser or self.request.user.groups.filter(name='admins').exists()
+        return self.request.user.is_superuser or self.request.user.groups.filter(name='Admins').exists()
 
     def handle_no_permission(self):
         raise Http404()
