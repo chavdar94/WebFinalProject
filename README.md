@@ -1,4 +1,5 @@
-[Link to website in aws](http://ec2-13-51-90-106.eu-north-1.compute.amazonaws.com/) 
+[Link to website in aws](http://www.dev-forum.eu/) 
+<a href="http://www.dev-forum.eu/" style="font-size: larger;">Link to website in AWS</a>
 
 <sup>Note: works best in 1920x1080 and above (not mobile responsive yet)</sup>
 
