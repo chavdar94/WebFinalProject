@@ -29,11 +29,10 @@ services:
     ports:
       - 80:80
       - 443:443
-    depends_on:
-      - web
     volumes:
-      - ./static:/home/app/web/staticfiles
+      - ./static_files:/home/app/web/staticfiles
       - ./media:/home/app/web/media
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
+    links:
       - web
