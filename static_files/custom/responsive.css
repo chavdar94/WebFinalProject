@@ -127,6 +127,9 @@
 
     .post-title {
         font-size: 18px;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: initial;
     }
 
     .fa-regular {

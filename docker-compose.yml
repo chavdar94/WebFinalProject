@@ -6,8 +6,8 @@ services:
     command: gunicorn dev_forum.wsgi:application --bind 0.0.0.0:8000
     build: .
     volumes:
-      - ./static_files:/app/static
-      - ./media:/app/media
+      - /tmp/dev_forum/static:/app/static
+      - /tmp/dev_forum/media:/app/media
     ports:
       - "8000:8000"
     env_file:
@@ -30,8 +30,8 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./static_files:/home/app/web/staticfiles
-      - ./media:/home/app/web/media
+      - /tmp/dev_forum/static:/home/app/web/staticfiles
+      - /tmp/dev_forum/media:/home/app/web/media
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
     links:
