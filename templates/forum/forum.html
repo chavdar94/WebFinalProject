@@ -34,7 +34,7 @@
             </thead>
             <tbody>
             {% for post in object_list %}
-                <tr class="border-2 backdrop-blur-xl">
+                <tr class="post-row border-2 backdrop-blur-xl">
                     <td data-cell="post"
                         class="post-title px-6 py-4 font-bold text-white text-xl whitespace-nowrap hover:scale-105 ease-in duration-300">
                         <a href="{% url 'post_details' slug=post.slug %}">{{ post }}</a>
