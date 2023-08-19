@@ -8,8 +8,8 @@
             class="profile-container relative w-full min-h-max ml-6 mt-6 p-6 border border-gray-200 rounded-lg shadow backdrop-blur-xl flex flex-col justify-center items-start">
             <div class="flex flex-row-reverse">
                 <div class="w-1/4">
-		 
-                    </div>
+
+                </div>
                 <div class="w-3/4">
                     <h1 class="mb-2 text-4xl font-bold tracking-tight text-white">
                         {{ profile.user.user_name|capfirst }}'s
@@ -118,7 +118,8 @@
             {% endfor %}
         </div>
     </div>
-    <div class="profile-container hide-container w-[54%] mr-6 mt-6 p-6 border border-gray-200 rounded-lg shadow backdrop-blur-xl">
+    <div
+        class="profile-container hide-container w-[54%] mr-6 mt-6 p-6 border border-gray-200 rounded-lg shadow backdrop-blur-xl">
         <div>
             <h1 class="text-slate-300 text-2xl text-center font-bold mb-4">Latest 8 comments from
                 {% if profile.first_name and profile.last_name %}

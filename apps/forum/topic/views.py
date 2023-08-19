@@ -101,7 +101,6 @@ class TopicDelete(auth_mixins.LoginRequiredMixin, auth_mixins.UserPassesTestMixi
     model = Topic
     success_url = reverse_lazy('forum_topics')
     template_name = 'forum/topics/topic-delete.html'
-    success_url = reverse_lazy('forum_topics')
 
     def test_func(self):
         return self.request.user.is_superuser or self.request.user.groups.filter(name='Admins').exists()
