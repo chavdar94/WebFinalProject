@@ -1,4 +1,4 @@
-<a href="http://www.dev-forum.eu/" style="font-size: 48px;">Link to website</a>
+<a href="https://forum.chavdart.eu/" style="font-size: 48px;">Link to website</a>
 
 <sup>Note: works best in 1920x1080 and above (not mobile responsive yet)</sup>
 
